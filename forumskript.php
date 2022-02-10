@@ -3,6 +3,18 @@
 <body>
 
 <?php
+
+//  cd c:
+// cd xampp
+// cd htdocs
+// cd forum
+// git add .
+// git commit -m "kommentar"
+// git push origin vincent
+
+
+
+
 session_start();
 
 // Inloggning  ----------------------------------------------------------------------------------------------------------------
