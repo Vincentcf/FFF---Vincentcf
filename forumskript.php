@@ -64,7 +64,7 @@ if ($login_success == "true") {
 
 
 
-} else if ($_SESSION["Value"] = "Signup") { //SIGN UP ------------------------------------------------------------------------
+} else if ($_SESSION["Value"] = "Signup") { //SIGN UP -----------------------------------------------------------------------
 
 $servername = "localhost";
 $username = "root";
@@ -98,7 +98,7 @@ if ($conn->connect_error) {
 
 
 
-
+// HEJ
 
 
 
