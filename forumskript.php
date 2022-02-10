@@ -33,7 +33,7 @@ if ($result->num_rows > 0) {
 
   if($row["username"] == $_POST["username"] && $row["pass"] == $_POST["password"]) {
 
-    $login_success == "true";
+    $login_success = "true";
     
     } 
 
@@ -44,6 +44,7 @@ if ($result->num_rows > 0) {
 if ($login_success == "true") {
 
   header("Location: index.php", TRUE);
+  
 
 } else {
 
@@ -64,6 +65,29 @@ if ($login_success == "true") {
 
 
 } else if ($_SESSION["Value"] = "Signup") { //SIGN UP ------------------------------------------------------------------------
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$DBname = "forum";
+$conn = new mysqli($servername, $username, $password, $DBname); //kolla
+  
+  
+$name = $_POST["name"];
+$email = $_POST["email"];
+$homepage = $_POST["homepage"];
+$comment = $_POST["comment"];
+$sql = "INSERT INTO Guestbook (fname, lname, username, pass, pfp, time) VALUES ('$fname', '$lname', '$username', '$password', '$pfp', now())";
+$conn->query($sql);
+  
+if ($conn->connect_error) {
+
+  die("Connection failed: " . $conn->connect_error);
+
+} else {
+  return;
+}
+  
 
 } else {
 

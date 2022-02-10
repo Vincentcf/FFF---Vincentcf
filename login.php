@@ -18,30 +18,31 @@
         <br><br>
         <input type="submit" value="Submit">
       </form>
-
+      <br><br>
+      <form action="signup.php">
+        <input type="submit" value="Sign up">
+    </form>
 
 
       <?php
       session_start();
+      $_SESSION["Value"] = "Login";
       
       if (isset($_SESSION["Failed"]) && $_SESSION["Failed"] == "true"){
 
-          echo "<h3>Wrong username or password!<h3>";
+          echo "<h3 style='color:red'>Wrong username or password!</h3>";
 
       } else {
 
           return;
         
         }
+
         $_SESSION["Failed"] = "false";
       
       ?>
 
 
-      <br><br>
-      <form action="signup.html">
-        <input type="submit" value="Sign up">
-    </form>
     
 </body>
 </html>

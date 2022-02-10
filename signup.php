@@ -29,6 +29,14 @@
     <form action="login.php">
         <input type="submit" value="Login">
     </form>
+
+    <?php
+    session_start();
+    $_SESSION["Value"] = "Signup";
+    
+
+
+    ?>
       
     
 </body>
