@@ -15,6 +15,7 @@
 
 
 
+
 session_start();
 
 // Inloggning  ----------------------------------------------------------------------------------------------------------------
@@ -49,8 +50,6 @@ if ($result->num_rows > 0) {
 
     $_SESSION['loginname'] = $row["fname"] . " " . $row["lname"];
 
-     
-    
     } 
 
   }
@@ -82,27 +81,24 @@ if ($login_success == "true") {
 
 } else if ($_SESSION["Value"] = "Signup") { //SIGN UP -----------------------------------------------------------------------
 
+
 $servername = "localhost";
 $username = "root";
 $password = "";
 $DBname = "forum";
 $conn = new mysqli($servername, $username, $password, $DBname); //kolla
-  
-  
-$name = $_POST["name"];
-$email = $_POST["email"];
-$homepage = $_POST["homepage"];
-$comment = $_POST["comment"];
-$sql = "INSERT INTO Guestbook (fname, lname, username, pass, pfp, time) VALUES ('$fname', '$lname', '$username', '$password', '$pfp', now())";
-$conn->query($sql);
-  
-if ($conn->connect_error) {
 
-  die("Connection failed: " . $conn->connect_error);
 
-} else {
-  return;
-}
+$date = date('m/d/Y h:i:s a', time());
+$target_dir = "pfp/";
+$uploaded_file = basename($_FILES["fileToUpload"]["name"]) . $date;
+$target_file = $target_dir . $uploaded_file;
+
+
+move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
+$sql = "INSERT INTO users (fname, lname, username, pass, pfp, time) VALUES ('$_POST["fname"]', '$_POST["lname"]', '$_POST["fname"]', '$_POST["username"]', '$_POST["password"]'', '$uploaded_file', NOW())"; 
+$result = $conn->query($sql);
+
   
 
 } else {
@@ -118,7 +114,7 @@ if ($conn->connect_error) {
 
 
 
-
+/*
 
 if (isset($_POST['username']) && isset($_POST['password'])){
 
@@ -260,3 +256,4 @@ if ($uploadOk == 0) {
 
 </body>
 </html>
+*/

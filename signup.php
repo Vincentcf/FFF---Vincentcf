@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <form action="formulärskript.php" method="post">
+    <form action="forumskript.php" method="post">
         First Name:<br>
         <input type="text" name="fname">
         <br><br>
