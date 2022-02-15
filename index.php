@@ -7,10 +7,10 @@
     <title>Forum</title>
 </head>
 <body>
-    <h1>Welcome</h1>
     <?php
     session_start();
-
+    echo 'You are logged in as: ' . '<b>' . $_SESSION['loginname'] . '<b>';
+    echo '<h1>Welcome</h1>'
 
 
 

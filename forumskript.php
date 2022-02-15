@@ -46,6 +46,10 @@ if ($result->num_rows > 0) {
   if($row["username"] == $_POST["username"] && $row["pass"] == $_POST["password"]) {
 
     $login_success = "true";
+
+    $_SESSION['loginname'] = $row["fname"] . " " . $row["lname"];
+
+     
     
     } 
 
