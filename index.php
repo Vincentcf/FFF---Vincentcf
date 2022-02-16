@@ -24,32 +24,26 @@
     $pfp = $_SESSION["pfp"];
     */
 
+    echo "<br> <br>" . "Session started" . "<br><br>";
+
     echo 'You are logged in as: ' . '<b>' . $_SESSION['loginname'] . "<br>" .  "Username: " . $_SESSION["username"] . '<b>';
     echo '<h1>Welcome</h1>';
  
-
-    echo "<br> <br>" . '<form method="post" action="??????HÄR SKA DET VARA">' . '<button type="submit">' . //Få denna knapp att köra linje 35 - 43.
-     "Check if you are logged in" . '</button>' . '<form>' . "<br>";
+    echo "<br> <br>" . '<form method="post" action="createThread.php">' . '<button type="submit">' .
+    "Create new thread" . '</button>' . '<form>' . "<br>";
     echo "<a href='uploadFile.php'>Upload a file</a>";
-
-    if (isset($_SESSION["username"]) &&
-    !empty($_SESSION["username"])) {
-        echo "Du är inloggad som " . 
-        $_SESSION["username"];
-        echo '<form method="post" action="logoutPage.php">' . '<button type="submit">' . "Logout" . '</button>' . '<form>';
-    }
-    else{
-        echo "Du är inte inloggad.";
-    }
-
-    echo "<p class=p_acc>Your account details:</p>" . "Name: " . "<br>" . "Email: " . "<br>" . "Website: " . "<br>" . "Comment: " . "<br><br>";
-
-    echo "<br> <br>" . "Session started";
-    echo "<br> <br>" . '<form method="post" action="checklogin.php">' . '<button type="submit">' .
-     "Check if you are logged in" . '</button>' . '<form>' . "<br>";
-    echo "<a href='uploadFile.php'>Upload a file</a>";
+   /* echo "<p class=p_acc>Your account details:</p>" . "Name: " . "<br>" . "Email: " . "<br>" . "Website: " . "<br>" . "Comment: " . "<br><br>"; */
 
 
+   
+ 
+
+    echo "<table class=threads>";
+    echo "<tbody>"; 
+    echo "<tr class=threadRow>" . "<th>  </th>" . "<th>Nr</th>" . "<th>Rubrik</th>" . "<th>Skapad av</th>" . "<th>Senaste inlägg</th>" . "</tr>";
+    echo "<tr class=threadRow>" . "<th>  </th>" . "<th>Nr</th>" . "<th>Rubrik</th>" . "<th>Skapad av</th>" . "<th>Senaste inlägg</th>" . "</tr>";
+    echo "<tr class=threadRow>" . "<th>  </th>" . "<th>Nr</th>" . "<th>Rubrik</th>" . "<th>Skapad av</th>" . "<th>Senaste inlägg</th>" . "</tr>";
+    echo "<tr class=threadRow>" . "<th>  </th>" . "<th>Nr</th>" . "<th>Rubrik</th>" . "<th>Skapad av</th>" . "<th>Senaste inlägg</th>" . "</tr>";
 
 
 
