@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>index.html</title>
+    <title>createThread.php</title>
 </head>
 <body>
     
@@ -12,6 +12,47 @@
 
 <?php
 session_start();
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "forum";
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+echo '<h1>Welcome</h1>';
+
+echo 'You are logged in as: ' . '<b>' . $_SESSION['loginname'] . "<br>" .  "Username: " . $_SESSION["username"] . '<b><br><br>';
+
+
+$title = $_POST["title"];
+$descr = $_POST["descr"];
+$contactInfo = $_POST["contactInfo"];
+$uploadedFile = $_POST["uploadedFile"];
+$sql = "INSERT INTO threads (title, descr, contactInfo, uploadedFile) 
+        VALUES ('$title', '$descr', '$contactInfo', '$uploadedFile')";
+$conn->query($sql);
+
+
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+  else {
+      echo "<p class=connec_yes>Posted successfully</p><br>";
+      $sql = "SELECT * FROM threads";
+      $result = $conn->query($sql);
+      echo "<p class=postedThread>Your posted thread:</p>" . "Title: " . $_POST["title"] . "<br>" . "Description: " . $_POST["descr"] . "<br>" . "Contact info: " . $_POST["contactInfo"] . "<br>" . "Filename: " . $_POST["uploadedFile"] . "<br><br>";
+    
+    /*
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            echo "<p class=p_acc>Previous threads:</p>" . "Title:" . $row["title"] . "<br>" . "Description: " . $row["description"] . "<br>" . "Contact info: " . $row["contactInfo"] . "<br><br>"; // . $row["uploadedFile"] $row["uploadTime"] .
+            }
+        }
+        */
+    }
+
+/*
 echo '<form action="threadConfirmation.php" method="post">
 <input type="text" name="title" placeholder="Title"> <br>
 <input type="text" name="description" placeholder="Description"> <br>
@@ -19,6 +60,11 @@ echo '<form action="threadConfirmation.php" method="post">
 <input type="text" name="uploadedFile" placeholder="(Lägg till ladda upp fil)"> <br>
 <input type="submit" value="Submit">
 </form>';
+*/
+
+
+
+
 
 /* 
 WEBBSERV SQL PHP FORUM TABLE COMMANDS

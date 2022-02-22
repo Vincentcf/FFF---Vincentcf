@@ -7,3 +7,15 @@ th {
 th{
     text-align: left;
 }
+
+#formElement{
+    display:none;
+    color: red;
+
+}
+
+.postedThread{
+    font-weight: bold;
+    font-size: 20px;
+    font-style: oblique;
+}

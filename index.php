@@ -9,8 +9,54 @@
 </head>
 <body>
 
+    <?php
+    session_start();
+    
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $DBname = "forum";
+    $conn = new mysqli($servername, $username, $password, $DBname);
 
-<<table class="threads">
+    echo '<h1>Welcome</h1>';
+
+    echo 'You are logged in as: ' . '<b>' . $_SESSION['loginname'] . "<br>" .  "Username: " . $_SESSION["username"] . '<b><br><br>';
+
+    echo "<button onclick=showForm() >" . "Create new thread/post" . "</button>" . "<br><br>";
+
+    /*
+    echo "<table class=threads>";
+    echo "<tbody>"; 
+    echo "<tr class=threadRow>" . "<th>  </th>" . "<th>Nr</th>" . "<th>Rubrik</th>" . "<th>Skapad av</th>" . "<th>Senaste inlägg</th>" . "</tr>";
+    echo "<tr class=threadRow>" . "<th>  </th>" . "<th>Nr</th>" . "<th>Rubrik</th>" . "<th>Skapad av</th>" . "<th>Senaste inlägg</th>" . "</tr>";
+    echo "<tr class=threadRow>" . "<th>  </th>" . "<th>Nr</th>" . "<th>Rubrik</th>" . "<th>Skapad av</th>" . "<th>Senaste inlägg</th>" . "</tr>";
+    echo "<tr class=threadRow>" . "<th>  </th>" . "<th>Nr</th>" . "<th>Rubrik</th>" . "<th>Skapad av</th>" . "<th>Senaste inlägg</th>" . "</tr>";
+    echo "</tbody>";
+    echo "</table>";
+    */
+
+    ?>
+
+<script type="text/javascript">
+    function showForm() {
+        document.getElementById('formElement').style.display = 'block';
+        }
+</script>
+
+
+    <form id="formElement" action="createThread.php" method="post">
+        <input type="text" name="title" placeholder="Title"> <br>
+        <input type="text" name="descr" placeholder="Description"> <br>
+        <input type="tel" name="contactInfo" placeholder="Contact info"> <br>
+        <input type="file" name="uploadedFile" placeholder="File"> <br>
+    <!-- <a href='uploadFile.php'>Upload a file</a> <br> -->
+        <input type="submit" value="Submit">
+        <br><br>
+    </form>
+
+
+
+<table class="threads">
     <tbody>
         <tr class="threadRow">
             <th></th>
@@ -29,7 +75,7 @@
                     <input type="hidden" name="topicid" value="0">
                     <input type="hidden" name="updates" value="1">
                     <input type="hidden" name="originator" value="holros">
-                    <input class="result" type="submit" name="submit" value="Läs">
+                    <input class="result" type="submit" name="submit" value="Open thread">
                 </form> 
             </td>
             <td> Nr </td>
@@ -40,43 +86,6 @@
         
     </tbody>
 </table>
-    <?php
-    session_start();
-    
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $DBname = "forum";
-    $conn = new mysqli($servername, $username, $password, $DBname);
-    $sql = "SELECT * FROM users (fname, lname, username, pass, pfp, time)";
-
-    /*
-    $fname = $_POST["fname"];
-    $lname = $_SESSION["lname"];
-    $username = $_SESSION["username"];
-    $pfp = $_SESSION["pfp"];
-    */
-
-    echo "<br> <br>" . "Session started" . "<br><br>";
-
-    echo 'You are logged in as: ' . '<b>' . $_SESSION['loginname'] . "<br>" .  "Username: " . $_SESSION["username"] . '<b>';
-    echo '<h1>Welcome</h1>';
- 
-    echo "<br> <br>" . '<form method="post" action="createThread.php">' . '<button type="submit">' .
-    "Create new thread" . '</button>' . '<form>' . "<br>";
-    echo "<a href='uploadFile.php'>Upload a file</a>";
-   /* echo "<p class=p_acc>Your account details:</p>" . "Name: " . "<br>" . "Email: " . "<br>" . "Website: " . "<br>" . "Comment: " . "<br><br>"; */
-
-
-    echo "<table class=threads>";
-    echo "<tbody>"; 
-    echo "<tr class=threadRow>" . "<th>  </th>" . "<th>Nr</th>" . "<th>Rubrik</th>" . "<th>Skapad av</th>" . "<th>Senaste inlägg</th>" . "</tr>";
-    echo "<tr class=threadRow>" . "<th>  </th>" . "<th>Nr</th>" . "<th>Rubrik</th>" . "<th>Skapad av</th>" . "<th>Senaste inlägg</th>" . "</tr>";
-    echo "<tr class=threadRow>" . "<th>  </th>" . "<th>Nr</th>" . "<th>Rubrik</th>" . "<th>Skapad av</th>" . "<th>Senaste inlägg</th>" . "</tr>";
-    echo "<tr class=threadRow>" . "<th>  </th>" . "<th>Nr</th>" . "<th>Rubrik</th>" . "<th>Skapad av</th>" . "<th>Senaste inlägg</th>" . "</tr>";
-    echo "</tbody>";
-    echo "</table>";
-    ?>
 
 
 </body>
