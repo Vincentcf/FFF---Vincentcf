@@ -4,9 +4,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Forum</title>
 </head>
 <body>
+
+
+<<table class="threads">
+    <tbody>
+        <tr class="threadRow">
+            <th></th>
+            <th> Nr </th>
+            <th> Rubrik </th>
+            <th> Skapad av </th>
+            <th> Senaste inlägg </th>
+        </tr>
+        <tr class="threadRow">
+            <td>
+                <form action="readthread.php" method="post">
+                    <input type="hidden" name="email" value="manfol">
+                    <input type="hidden" name="userpass" value="bar">
+                    <input type="hidden" name="presentation" value="Jag heter Magnus">
+                    <input type="hidden" name="header" value="Första tråden">
+                    <input type="hidden" name="topicid" value="0">
+                    <input type="hidden" name="updates" value="1">
+                    <input type="hidden" name="originator" value="holros">
+                    <input class="result" type="submit" name="submit" value="Läs">
+                </form> 
+            </td>
+            <td> Nr </td>
+            <td> Rubrik </td>
+            <td> Skapad av </td>
+            <td> Senaste inlägg </td>
+        </tr>
+        
+    </tbody>
+</table>
     <?php
     session_start();
     
@@ -35,19 +68,16 @@
    /* echo "<p class=p_acc>Your account details:</p>" . "Name: " . "<br>" . "Email: " . "<br>" . "Website: " . "<br>" . "Comment: " . "<br><br>"; */
 
 
-   
- 
-
     echo "<table class=threads>";
     echo "<tbody>"; 
     echo "<tr class=threadRow>" . "<th>  </th>" . "<th>Nr</th>" . "<th>Rubrik</th>" . "<th>Skapad av</th>" . "<th>Senaste inlägg</th>" . "</tr>";
     echo "<tr class=threadRow>" . "<th>  </th>" . "<th>Nr</th>" . "<th>Rubrik</th>" . "<th>Skapad av</th>" . "<th>Senaste inlägg</th>" . "</tr>";
     echo "<tr class=threadRow>" . "<th>  </th>" . "<th>Nr</th>" . "<th>Rubrik</th>" . "<th>Skapad av</th>" . "<th>Senaste inlägg</th>" . "</tr>";
     echo "<tr class=threadRow>" . "<th>  </th>" . "<th>Nr</th>" . "<th>Rubrik</th>" . "<th>Skapad av</th>" . "<th>Senaste inlägg</th>" . "</tr>";
-
-
-
+    echo "</tbody>";
+    echo "</table>";
     ?>
-    
+
+
 </body>
 </html>

@@ -1,0 +1,9 @@
+table{
+    width: 80%;
+}
+th {
+    background-color: gray;
+}
+th{
+    text-align: left;
+}
