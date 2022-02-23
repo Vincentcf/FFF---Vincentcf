@@ -87,10 +87,7 @@
 						<span class="focus-input2" data-placeholder="DESCRIPTION"></span>
 					</div>
 
-					<div class="wrap-input2 ">
-						
-                    
-                      
+					<div class="wrap-input2">
                         <input class="form-control form-control-sm" id="formFileSm" type="file" name="uploadedFile" placeholder="File">
 					</div>
 
@@ -127,7 +124,7 @@
                     <input type="hidden" name="topicid" value="0">
                     <input type="hidden" name="updates" value="1">
                     <input type="hidden" name="originator" value="holros">
-                    <input class="result" type="submit" name="submit" value="Open thread">
+                    <input class="result" type="submit" name="submit" value="Open thread">  <!-- $html = file_get_contentblablabla -->
                 </form> 
             </td>
             <td> Nr </td>
@@ -135,16 +132,8 @@
             <td> Skapad av </td>
             <td> Senaste inlägg </td>
         </tr>
-        <<a name="" id="" class="btn btn-primary" href="previousthreads.php" role="button"></a>
-        <?php 
-        $sql = "SELECT * FROM threads";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                echo "<p class=p_acc>Previous threads:</p>" . "Title: " . $row["title"] . "<br><br>";
-                }
-            }
-        ?>
+        <br><br>
+        <a name="" id="" class="btn btn-primary" href="previousthreads.php" role="button">Previous threads</a>
 
     </tbody>
 </table>
