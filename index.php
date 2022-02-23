@@ -24,7 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>Forum</title>
 </head>
 <body>
@@ -107,6 +107,7 @@
 		</div>
 	</div>
 
+  <!-- Start på tidigare skapade trådar -->  
 <table class="threads">
     <tbody>
         <tr class="threadRow">
@@ -134,17 +135,17 @@
             <td> Skapad av </td>
             <td> Senaste inlägg </td>
         </tr>
-        
+        <<a name="" id="" class="btn btn-primary" href="previousthreads.php" role="button"></a>
         <?php 
         $sql = "SELECT * FROM threads";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                echo "<p class=p_acc>Previous threads:</p>" . "Title:" . $row["title"] . "<br>" . "Description: " . $row["descr"] . "<br>" . "Contact info: " . $row["contactInfo"] . "<br><br>"; // . $row["uploadedFile"] $row["uploadTime"] .
+                echo "<p class=p_acc>Previous threads:</p>" . "Title: " . $row["title"] . "<br><br>";
                 }
             }
         ?>
-        
+
     </tbody>
 </table>
 
