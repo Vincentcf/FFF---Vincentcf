@@ -10,7 +10,7 @@
     <?php
     session_start();
     echo 'You are logged in as: ' . '<b>' . $_SESSION['loginname'] . '<b>';
-    echo '<h1>Welcome</h1>'
+    echo '<h1>Welcome</h1>';
 
 
 
