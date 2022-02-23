@@ -1,3 +1,8 @@
+body{
+    background-image: url('images/bg-01.jpg');
+    background-color: blue;
+}
+
 table{
     width: 80%;
 }
@@ -19,3 +24,4 @@ th{
     font-size: 20px;
     font-style: oblique;
 }
+
