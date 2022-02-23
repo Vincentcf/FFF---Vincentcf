@@ -7,8 +7,9 @@
     <title>Forum</title>
 </head>
 <body>
-
-    <form action="forumskript.php" method="post">
+ 
+      
+    <form action="forumskript.php" method="post" enctype="multipart/form-data">
         First Name:<br>
         <input type="text" name="fname">
         <br><br>
@@ -29,15 +30,38 @@
     <form action="login.php">
         <input type="submit" value="Login">
     </form>
-
+    
     <?php
     session_start();
     $_SESSION["Value"] = "Signup";
-    
 
+
+
+    if (isset($_SESSION["Failed"])){
+
+        if ($_SESSION["Failed"] == "falsecheck"){
+
+            echo "<h3 style='color:red'>File is not an image</h3>";
+
+        } else if ($_SESSION["Failed"] == "size"){
+
+            echo "<h3 style='color:red'>Your file is too large</h3>";
+            
+        } else if ($_SESSION["Failed"] == "format"){
+
+            echo "<h3 style='color:red'>Only JPG, JPEG, PNG & GIF files are allowed</h3>";
+            
+        } else {
+
+            return;
+
+        }
+
+    }
+    
+    $_SESSION["Failed"] = "false";
 
     ?>
-      
     
 </body>
 </html>

@@ -20,7 +20,7 @@ session_start();
 
 // Inloggning  ----------------------------------------------------------------------------------------------------------------
 
-if ($_SESSION["Value"] = "Login") {
+if ($_SESSION["Value"] == "Login") {
 
 $servername = "localhost";
 $username = "root";
@@ -79,27 +79,71 @@ if ($login_success == "true") {
 
 
 
-} else if ($_SESSION["Value"] = "Signup") { //SIGN UP -----------------------------------------------------------------------
+} else if ($_SESSION["Value"] == "Signup") { //SIGN UP -----------------------------------------------------------------------
 
 
+$_SESSION["Failed"] = "";
 $servername = "localhost";
 $username = "root";
 $password = "";
 $DBname = "forum";
-$conn = new mysqli($servername, $username, $password, $DBname); //kolla
+$conn = new mysqli($servername, $username, $password, $DBname); 
 
 
-$date = date('m/d/Y h:i:s a', time());
-$target_dir = "pfp/";
-$uploaded_file = basename($_FILES["fileToUpload"]["name"]) . $date;
-$target_file = $target_dir . $uploaded_file;
+$fname = $_POST["fname"];
+$lname = $_POST["lname"];
+$username = $_POST["username"];
+$password = $_POST["password"];
 
 
-move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
-$sql = "INSERT INTO users (fname, lname, username, pass, pfp, time) VALUES ('$_POST["fname"]', '$_POST["lname"]', '$_POST["fname"]', '$_POST["username"]', '$_POST["password"]'', '$uploaded_file', NOW())"; 
-$result = $conn->query($sql);
+$target_dir = "pfp/"; // Sets folder as directory for profile pictures
+$uploaded_file =  basename($_FILES["fileToUpload"]["name"]); // Name of file
+$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]); 
+$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
+
+// Does a few checks to make sure image is suitable
+
+
+  $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+
+  // Checks it's real image
+  if($check == false) {
+
+    header("Location: signup.php", TRUE);
+    $_SESSION["Failed"] = "falsecheck";
+
+    // Check it's not too big
+  } else if ($_FILES["fileToUpload"]["size"] > 500000){
+
+    header("Location: signup.php", TRUE);
+    $_SESSION["Failed"] = "size";
+
+    // Only allow JPG, JPEG, PNG & GIF
+  } else if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+
+    header("Location: signup.php", TRUE);
+    $_SESSION["Failed"] = "format";
   
+  } else {
+
+    move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file); // Moves picture into folder
+    
+    /* Changes name of picture to make each picture distinct */
+    $old_name = $target_dir . $uploaded_file; 
+    $new_name = $target_dir . $username . $uploaded_file; 
+    rename( $old_name, $new_name);
+
+    /* Inserts values into database */
+    $sql = "INSERT INTO users (fname, lname, username, pass, pfp, time) VALUES ('$fname', '$lname', '$username', '$password', '$new_name', NOW())"; 
+    $result = $conn->query($sql); 
+    header("Location: index.php", TRUE);
+    echo "hi";
+
+  }
+
+ 
+
 
 } else {
 
@@ -108,9 +152,6 @@ $result = $conn->query($sql);
 }
 
 
-
-
-// HEJ
 
 
 
@@ -160,7 +201,7 @@ if(isset($_POST['Logout'])) {
 	session_destroy(); 
 	}
 
-// Sign Up
+//
 
 $target_dir = "files/";
 $uploaded_file = basename($_FILES["fileToUpload"]["name"]);
