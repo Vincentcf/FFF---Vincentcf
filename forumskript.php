@@ -112,7 +112,6 @@ if($check == false) {
   $sql = "INSERT INTO users (fname, lname, username, pass, pfp, time) VALUES ('$fname', '$lname', '$username', '$password', '$new_name', NOW())"; 
   $result = $conn->query($sql); 
   header("Location: index.php", TRUE);
-  echo "hi";
 
 }
 
