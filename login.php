@@ -24,8 +24,8 @@ if (isset($_POST['login'])) { // If login button is pressed
           <input type="submit" value="Submit">
         </form>
         <br><br>
-        <form action="signup.php">
-          <input type="submit" value="Sign up">
+        <form method="post">
+        <input type="submit" id="signup" name="signup" value="Signup">
       </form>';
 
   if (isset($_SESSION["Failed"]) && $_SESSION["Failed"] == "true"){
@@ -58,8 +58,8 @@ Profile Picture:
 <input type="file" name="fileToUpload" value="Select file" id="fileToUpload">
 <input type="submit" value="Submit">
 </form><br>';
-  echo '<form action="login.php">
-  <input type="submit" value="Login">
+  echo '<form method="post">
+  <input type="submit" id="login" name="login" value="Login">
 </form>';
   if (isset($_SESSION["Failed"])){
 
