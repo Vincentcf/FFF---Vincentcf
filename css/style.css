@@ -1,0 +1,26 @@
+body{
+    background-image: url('images/bg-01.jpg');
+}
+
+table{
+    width: 80%;
+}
+th {
+    background-color: gray;
+}
+th{
+    text-align: left;
+}
+
+#formElement{
+    display:none;
+    color: red;
+
+}
+
+.postedThread{
+    font-weight: bold;
+    font-size: 20px;
+    font-style: oblique;
+}
+
