@@ -12,21 +12,24 @@
 session_start();
 
 if (isset($_POST['login'])) { // If login button is pressed
+
   $_SESSION["Value"] = "Login";
 
-  echo '<form action="forumskript.php" method="post">
-          Username:<br>
-          <input type="text" name="username">
-          <br><br>
-          Password:<br>
-          <input type="password" name="password">
-          <br><br>
-          <input type="submit" value="Submit">
-        </form>
-        <br><br>
-        <form method="post">
-        <input type="submit" id="signup" name="signup" value="Signup">
-      </form>';
+  echo '
+  <form action="forumskript.php" method="post">
+    Username:<br>
+    <input type="text" name="username">
+    <br><br>
+    Password:<br>
+    <input type="password" name="password">
+    <br><br> 
+    <input type="submit" value="Submit">
+  </form>
+  <br><br>
+  
+  <form method="post">
+    <input type="submit" id="signup" name="signup" value="Signup">
+  </form>';
 
   if (isset($_SESSION["Failed"]) && $_SESSION["Failed"] == "true"){
 
@@ -38,29 +41,33 @@ if (isset($_POST['login'])) { // If login button is pressed
   
   }
 
+
 } else {
+
   $_SESSION["Value"] = "Signup";
  
-  echo '    <form action="forumskript.php" method="post" enctype="multipart/form-data">
-First Name:<br>
-<input type="text" name="fname">
-<br><br>
-Last Name:<br>
-<input type="text" name="lname">
-<br><br>
-Username: <br>
-<input type="text" name="username">
-<br><br>
-Password:<br>
-<input type="password" name="password">
-<br><br>
-Profile Picture:
-<input type="file" name="fileToUpload" value="Select file" id="fileToUpload">
-<input type="submit" value="Submit">
-</form><br>';
-  echo '<form method="post">
-  <input type="submit" id="login" name="login" value="Login">
-</form>';
+  echo '
+  <form action="forumskript.php" method="post" enctype="multipart/form-data">
+    First Name:<br>
+    <input type="text" name="fname">
+    <br><br>
+    Last Name:<br>
+    <input type="text" name="lname">
+    <br><br>
+    Username: <br>
+    <input type="text" name="username">
+    <br><br>
+    Password:<br>
+    <input type="password" name="password">
+    <br><br>
+    Profile Picture:
+    <input type="file" name="fileToUpload" value="Select file" id="fileToUpload">
+    <input type="submit" value="Submit">
+  </form><br>
+  <form method="post">
+    <input type="submit" id="login" name="login" value="Login">
+  </form>';
+
   if (isset($_SESSION["Failed"])){
 
     if ($_SESSION["Failed"] == "falsecheck"){
@@ -81,15 +88,13 @@ Profile Picture:
 
     }
   }
+
 }
 
-
-
-  $_SESSION["Failed"] = "false";
+$_SESSION["Failed"] = "false";
 
 ?>
 
 
-    
 </body>
 </html>
