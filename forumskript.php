@@ -7,7 +7,7 @@ session_start();
 
 // Inloggning  ----------------------------------------------------------------------------------------------------------------
 
-if ($_SESSION["Value"] == "login") {
+if ($_SESSION["Value"] == "Login") {
 
 $servername = "localhost";
 $username = "root";
