@@ -22,7 +22,7 @@ if (isset($_POST['login'])) { // If login button is pressed
     <br><br>
     Password:<br>
     <input type="password" name="password">
-    <br><br>
+    <br><br> 
     <input type="submit" value="Submit">
   </form>
   <br><br>
