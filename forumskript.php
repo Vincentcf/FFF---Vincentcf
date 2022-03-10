@@ -7,7 +7,7 @@ session_start();
 
 // Inloggning  ----------------------------------------------------------------------------------------------------------------
 
-if ($_SESSION["Value"] == "Login") {
+if ($_SESSION["Value"] == "login") {
 
 $servername = "localhost";
 $username = "root";
@@ -55,7 +55,7 @@ if ($login_success == "true") {
 }
 
 
-} else if ($_SESSION["Value"] == "Signup") { //SIGN UP -----------------------------------------------------------------------
+} else if ($_SESSION["Value"] == "signup") { //SIGN UP -----------------------------------------------------------------------
 
 
 $_SESSION["Failed"] = "";
