@@ -25,7 +25,7 @@
 <!--===============================================================================================-->
 
     <link rel="stylesheet" href="css/style.css">
-    <title>Forum</title>
+    <title>index.php</title>
 </head>
 <body>
 
@@ -105,7 +105,7 @@
 	</div>
 
   <!-- Start på tidigare skapade trådar -->  
-  <a name="" id="" class="btn btn-primary" href="previousthreads.php" role="button">Previous threads</a>
+  <a name="" id="" class="btn btn-primary" href="prevthreads.php" role="button">Previous threads</a>
 
 
 <!--===============================================================================================-->

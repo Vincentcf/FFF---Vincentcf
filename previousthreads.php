@@ -51,11 +51,11 @@ $servername = "localhost";
     $DBname = "forum";
     $conn = new mysqli($servername, $username, $password, $DBname);
     
- $sql = "SELECT * FROM threads";
+ $sql = "SELECT * FROM threads, users";
  $result = $conn->query($sql);
  if ($result->num_rows > 1) {
      while($row = $result->fetch_assoc()) {
-         echo "<p class=p_acc></p>" . $row["title"] . "<br><br>";
+         echo "<p class=p_acc></p>" . $row["title"] . $row["username"] . "<br><br>";
          }
      }
             ?> 
