@@ -11,9 +11,9 @@
 <?php
 session_start();
 
-if (isset($_POST['login'])) { // If login button is pressed
+if (isset($_POST['login'])) { // Displays Login form when the button gets a value
 
-  $_SESSION["Value"] = "Login";
+  $_SESSION["Value"] = "login";
 
   echo '
   <form action="forumskript.php" method="post">
@@ -23,12 +23,12 @@ if (isset($_POST['login'])) { // If login button is pressed
     Password:<br>
     <input type="password" name="password">
     <br><br> 
-    <input type="submit" value="Submit">
+    <input type="submit" value="Log In">
   </form>
   <br><br>
   
   <form method="post">
-    <input type="submit" id="signup" name="signup" value="Signup">
+    <input type="submit" id="signup" name="signup" value="Sign up">
   </form>';
 
   if (isset($_SESSION["Failed"]) && $_SESSION["Failed"] == "true"){
@@ -42,9 +42,9 @@ if (isset($_POST['login'])) { // If login button is pressed
   }
 
 
-} else {
+} elseif (isset($_POST['signup'])) { // Displays signup form when the button gets a value
 
-  $_SESSION["Value"] = "Signup";
+  $_SESSION["Value"] = "signup";
  
   echo '
   <form action="forumskript.php" method="post" enctype="multipart/form-data">
@@ -62,23 +62,25 @@ if (isset($_POST['login'])) { // If login button is pressed
     <br><br>
     Profile Picture:
     <input type="file" name="fileToUpload" value="Select file" id="fileToUpload">
-    <input type="submit" value="Submit">
-  </form><br>
+    <br><br>
+    <input type="submit" value="Register">
+  </form><br><br>
   <form method="post">
-    <input type="submit" id="login" name="login" value="Login">
+    <input type="submit" id="login" name="login" value="Log In"> 
   </form>';
 
+  // Does different checks to make sure image is allowed
   if (isset($_SESSION["Failed"])){
 
-    if ($_SESSION["Failed"] == "falsecheck"){
+    if ($_SESSION["Failed"] == "falsecheck"){ // Checks if file is an image
 
         echo "<h3 style='color:red'>File is not an image</h3>";
 
-    } else if ($_SESSION["Failed"] == "size"){
+    } else if ($_SESSION["Failed"] == "size"){ // Checks so file is not too big
 
         echo "<h3 style='color:red'>Your file is too large</h3>";
         
-    } else if ($_SESSION["Failed"] == "format"){
+    } else if ($_SESSION["Failed"] == "format"){ // Only allows certain formats
 
         echo "<h3 style='color:red'>Only JPG, JPEG, PNG & GIF files are allowed</h3>";
         
@@ -89,6 +91,17 @@ if (isset($_POST['login'])) { // If login button is pressed
     }
   }
 
+} else { // Displays signup or login button only before one of them gets assigned a value
+
+  echo '    <h1>Welcome to this forum!</h1>
+    
+  <form method="post">
+      <input type="submit" id="login" name="login" value="Login">
+      <br><br>
+      <input type="submit" id="signup" name="signup" value="Sign up">
+
+  </form>';
+  
 }
 
 $_SESSION["Failed"] = "false";
