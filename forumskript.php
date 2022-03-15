@@ -35,6 +35,7 @@ if ($result->num_rows > 0) {
     $login_success = "true";
 
     $_SESSION['loginname'] = $row["fname"] . " " . $row["lname"];
+    $_SESSION["username"] = $row["username"];
 
     } 
 
@@ -49,7 +50,10 @@ if ($login_success == "true") {
 
 } else {
 
-  header("Location: login.php", TRUE);
+  header("Location: main.php", TRUE);
+
+  $_SESSION["password"] = "wrong";
+
   $_SESSION["Failed"] = "true";
 
 }
@@ -78,8 +82,21 @@ $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
 
+if (!empty($_POST['fname']) && !empty($_POST['lname']) && !empty($_POST['username']) && !empty($_POST['password'])){
+
+  echo'hello';
+
+} else {
+
+  header("Location: main.php", TRUE);
+  $_SESSION["Failed"] = "filledOut";
+
+}
+
 // Does a few checks to make sure image is suitable
 $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+
+// if (isset)
 
 // Checks it's real image
 if($check == false) {
@@ -112,7 +129,7 @@ if($check == false) {
   $sql = "INSERT INTO users (fname, lname, username, pass, pfp, time) VALUES ('$fname', '$lname', '$username', '$password', '$new_name', NOW())"; 
   $result = $conn->query($sql); 
   $_SESSION['loginname'] = $fname . " " . $lname;
-  header("Location: index.php", TRUE);
+ // header("Location: index.php", TRUE);
 
 }
 
