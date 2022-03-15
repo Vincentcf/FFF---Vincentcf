@@ -129,7 +129,7 @@ if($check == false) {
   $sql = "INSERT INTO users (fname, lname, username, pass, pfp, time) VALUES ('$fname', '$lname', '$username', '$password', '$new_name', NOW())"; 
   $result = $conn->query($sql); 
   $_SESSION['loginname'] = $fname . " " . $lname;
- // header("Location: index.php", TRUE);
+  header("Location: index.php", TRUE);
 
 }
 
