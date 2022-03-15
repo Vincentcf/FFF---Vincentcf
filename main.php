@@ -11,7 +11,7 @@
 <?php
 session_start();
 
-if (isset($_POST['login'])) { // Displays Login form when the button gets a value
+if (isset($_POST['login']) or $_SESSION["password"] == "wrong") { // Displays Login form when the button gets a value
 
   $_SESSION["Value"] = "login";
 
@@ -31,10 +31,13 @@ if (isset($_POST['login'])) { // Displays Login form when the button gets a valu
     <input type="submit" id="signup" name="signup" value="Sign up">
   </form>';
 
+  $_SESSION["password"] = "true";
+
   if (isset($_SESSION["Failed"]) && $_SESSION["Failed"] == "true"){
 
     echo "<h3 style='color:red'>Wrong username or password!</h3>";
-  
+    
+   
   } else {
 
     return;
@@ -49,16 +52,16 @@ if (isset($_POST['login'])) { // Displays Login form when the button gets a valu
   echo '
   <form action="forumskript.php" method="post" enctype="multipart/form-data">
     First Name:<br>
-    <input type="text" name="fname">
+    <input type="text" id="fname" name="fname">
     <br><br>
     Last Name:<br>
-    <input type="text" name="lname">
+    <input type="text" id="lname" name="lname">
     <br><br>
     Username: <br>
-    <input type="text" name="username">
+    <input type="text" id="username" name="username">
     <br><br>
     Password:<br>
-    <input type="password" name="password">
+    <input type="password" id="password" name="password">
     <br><br>
     Profile Picture:
     <input type="file" name="fileToUpload" value="Select file" id="fileToUpload">
@@ -84,6 +87,10 @@ if (isset($_POST['login'])) { // Displays Login form when the button gets a valu
 
         echo "<h3 style='color:red'>Only JPG, JPEG, PNG & GIF files are allowed</h3>";
         
+    } else if ($_SESSION["Failed"] == "fillOut"){ // Only allows certain formats
+
+      echo "<h3 style='color:red'>Make sure to fill out entire form</h3>";
+      
     } else {
 
         return;
