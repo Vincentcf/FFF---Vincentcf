@@ -15,21 +15,21 @@ $sql = "SELECT * FROM threads";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-        $username = array($row["username"]);
-        $title = array($row["title"], $row["username"]);
+    $title = array($row["title"], $row["username"], $row["uploadTime"]);
+      /*  $title = array($row["title"]);
+        $username = array($row["username"]); */
         /*$username = array($row["username"]);*/
-        $uploadTime = array($row["uploadTime"]);
+       /* $uploadTime = array($row["uploadTime"]);*/
        /* array_push($row["title"], $row["username"], $row["uploadTime"]); */
         foreach($title as $x => $x_value){
-            $text = str_replace("***title***",$x_value,$text_array[0]);
-            $text = str_replace("***username***",$x_value,$text);
+            $text = str_replace("***title***",$row["title"],$text_array[1]);
+            $text = str_replace("***username***",$row["username"],$text);
+            $text = str_replace("***uploadTime***",$row["uploadTime"],$text);
+
             echo $text;
-            echo $text_array[1];
+            break;
         }
-     /*   foreach($username as $y => $y_value){
-            $text = str_replace("***username***",$y_value,$text_array[1]);
-            echo $text;
-        }*/
+
     }
 } else {
     echo "If sats inte funka";

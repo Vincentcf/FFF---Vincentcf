@@ -10,7 +10,7 @@
     <title>createThread.php</title>
 </head>
 <body>
-    
+<a class="btn btn-primary" href="index.php" role="button">Go back</a>
     
 
 <?php

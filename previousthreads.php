@@ -30,7 +30,7 @@
 <body>
 
 
-<a name="" id="" class="btn btn-primary" href="index.php" role="button"><- Go back</a>
+<a id="" class="btn btn-primary" href="index.php" role="button"><- Go back</a>
 <table class="threads">
     <tbody>
         <tr class="threadrow">

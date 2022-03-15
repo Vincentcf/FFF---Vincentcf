@@ -47,7 +47,7 @@
 	}
     ?>
 	<form class="btn btn-outline-primary" action="main.php" method="post">
-		<input type="submit" name="logout" value="Log out" placeholder="Logot">
+		<input type="submit" name="logout" value="logout" placeholder="Logot">
 	</form>
 
 <!-- <script type="text/javascript">
