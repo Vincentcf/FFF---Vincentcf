@@ -7,7 +7,7 @@ session_start();
 
 // Inloggning  ----------------------------------------------------------------------------------------------------------------
 
-if ($_SESSION["Value"] == "Login") {
+if ($_SESSION["Value"] == "login") {
 
 $servername = "localhost";
 $username = "root";
@@ -35,7 +35,7 @@ if ($result->num_rows > 0) {
     $login_success = "true";
 
     $_SESSION['loginname'] = $row["fname"] . " " . $row["lname"];
-    $_SESSION['username'] = $row["username"];
+
     } 
 
   }
@@ -55,7 +55,7 @@ if ($login_success == "true") {
 }
 
 
-} else if ($_SESSION["Value"] == "Signup") { //SIGN UP -----------------------------------------------------------------------
+} else if ($_SESSION["Value"] == "signup") { //SIGN UP -----------------------------------------------------------------------
 
 
 $_SESSION["Failed"] = "";
@@ -112,29 +112,6 @@ if($check == false) {
   $sql = "INSERT INTO users (fname, lname, username, pass, pfp, time) VALUES ('$fname', '$lname', '$username', '$password', '$new_name', NOW())"; 
   $result = $conn->query($sql); 
   $_SESSION['loginname'] = $fname . " " . $lname;
-  
-  $sql = "SELECT * FROM users";
-$result = $conn->query($sql);
-$login_success == "";
-$_SESSION["Failed"] = "";
-
-
-if ($result->num_rows > 0) {
-
-  while($row = $result->fetch_assoc()) {
-
-  if($row["username"] == $_POST["username"] && $row["pass"] == $_POST["password"]) {
-
-    $login_success = "true";
-
-    $_SESSION['loginname'] = $row["fname"] . " " . $row["lname"];
-    $_SESSION['username'] = $row["username"];
-    } 
-
-  }
-
-}
-
   header("Location: index.php", TRUE);
 
 }

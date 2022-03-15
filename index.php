@@ -42,7 +42,13 @@
     echo '<h1>Welcome</h1>';
     echo 'You are logged in as: ' . '<b>' . $_SESSION['loginname'] . "</b> <br>" .  "Username: <b>" . $_SESSION['username'] . '</b><br><br>';
 
+	if(isset($_POST['logout'])){
+		session_destroy();
+	}
     ?>
+	<form class="btn btn-outline-primary" action="main.php" method="post">
+		<input type="submit" name="logout" value="Log out" placeholder="Logot">
+	</form>
 
 <!-- <script type="text/javascript">
     function showForm() {
