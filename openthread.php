@@ -28,11 +28,13 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<h5> Open thread page. Page for reading a specific chosen thread from "previousthreads.php"</h5> <br><br>
+<h5> Open thread page. Page for reading a specific chosen thread from "prevthreads.php"</h5> <br>
 
-<a name="" id="" class="btn btn-primary" href="previousthreads.php" role="button"><- Go back</a>
+<a class="btn btn-primary" href="prevthreads.php" role="button"><- Go back</a>
 
 <br><br><br> 
+
+
 
 
 <?php
@@ -42,6 +44,28 @@ $servername = "localhost";
     $password = "";
     $DBname = "forum";
     $conn = new mysqli($servername, $username, $password, $DBname);
+	
+
+	$title = $_POST["title"];
+	$username = $_POST["username"];
+	$sql = "SELECT * FROM threads";
+
+	echo "Poster: " . $_POST["username"] . "<br><br> Title: ". $_POST["title"];
+
+	echo ""<div class=container>" . 
+	"<div class=row>" . 
+		"<div class=col bg-primary>" . 
+			Col 1
+		"</div>" . 
+		"<div class=col bg-warning>" . 
+			Col 2
+		"</div>" . 
+		"<div class=col bg-primary>" . 
+			Col 3
+		"</div>" . 
+	"</div>" . 
+"</div>""
+
 
 ?>
 

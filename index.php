@@ -68,6 +68,7 @@
 } 
 </script>
 
+<!-- START OF Create new thread section -->
 <button type="button" onclick=myFunction() class="btn btn-outline-info btn-rounded" data-mdb-ripple-color="dark">Create new thread/post</button>
 
 <div id="formElement" class="bg-contact2" style="background-image: url('images/bg-01.jpg');">
@@ -83,10 +84,7 @@
 						<span class="focus-input2" data-placeholder="TITLE"></span>
 					</div>
 
-					<div class="wrap-input2 validate-input" data-validate = "Valid email is required, i.e. abc@123.com">
-						<input class="input2" type="email" name="contactInfo" id="contactId">
-						<span class="focus-input2" data-placeholder="EMAIL"></span>
-					</div>
+					
 
 					<div class="wrap-input2 validate-input" data-validate = "Description is required">
 						<textarea class="input2" name="descr" id="descrId"></textarea>
@@ -109,6 +107,8 @@
 			</div>
 		</div>
 	</div>
+<!-- END OF Create new thread section -->
+
 
   <!-- Start på tidigare skapade trådar -->  
   <a name="" id="" class="btn btn-primary" href="prevthreads.php" role="button">Previous threads</a>

@@ -33,6 +33,7 @@
                 <th>Title</th>
                 <th>Username</th>
                 <th>Upload time</th>
+                <th>READ</th>
             </tr>
            <!-- <form action="#">
                 <input type="hidden" name="title" value="***title***">
@@ -44,15 +45,23 @@
 
             ***PHP***
             <tr>
-                <td></td>
+                <td>***number***</td>
                 <td>***title***</td>
                 <td>***username***</td>
                 <td>***uploadTime***</td>
+                <td>
+                    <form action="openthread.php" method="post">
+                        <input type="hidden" name="title" value="***title***"> 
+                        <input type="hidden" name="username" value="***username***">
+                        <input type="submit" value="Open thread">
+                    </form>
+                </td>
             </tr>
             ***PHP***
         </tbody>
     </table>
     <br><br><br>
+    <button class="btn btn-outline-info" onClick="window.location.href='openthread.php';">Open</button>
     <p> HEJHJEHJE ARRAY 2</p>
     <a class="btn btn-primary" href="index.php" role="button">Go back</a>
     <!--===============================================================================================-->

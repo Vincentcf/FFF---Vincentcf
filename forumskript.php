@@ -35,7 +35,8 @@ if ($result->num_rows > 0) {
     $login_success = "true";
 
     $_SESSION['loginname'] = $row["fname"] . " " . $row["lname"];
-
+    $_SESSION['username'] = $row["username"];
+    $_SESSION['username'] = $_POST["username"];
     } 
 
   }

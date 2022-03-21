@@ -24,15 +24,14 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 echo '<h1>Welcome</h1>';
 
-echo 'You are logged in as: ' . '<b>' . $_SESSION['loginname'] . "<br>" .  "Username: " . $_SESSION["username"] . '<b><br><br>';
+echo 'You are logged in as: ' . '<b>' . $_SESSION['loginname'] . "<br>" .  "Username: " . $_SESSION["username"] . '</b><br><br>';
 
 $username = $_SESSION["username"];
 $title = $_POST["title"];
 $descr = $_POST["descr"];
-$contactInfo = $_POST["contactInfo"];
 $uploadedFile = $_POST["uploadedFile"];
-$sql = "INSERT INTO threads (username, title, descr, contactInfo, uploadedFile) 
-        VALUES ('$username', '$title', '$descr', '$contactInfo', '$uploadedFile')";
+$sql = "INSERT INTO threads (username, title, descr, uploadedFile) 
+        VALUES ('$username', '$title', '$descr', '$uploadedFile')";
 $conn->query($sql);
 
 
@@ -44,7 +43,7 @@ if ($conn->connect_error) {
       echo "<p class=connec_yes>Posted successfully</p><br>";
       $sql = "SELECT * FROM threads";
       $result = $conn->query($sql);
-      echo "<p class=postedThread>Your posted thread:</p>" . "Title: " . $_POST["title"] . "<br>" . "Description: " . $_POST["descr"] . "<br>" . "Contact info: " . $_POST["contactInfo"] . "<br>" . "Filename: " . $_POST["uploadedFile"] . "<br><br>";
+      echo "<p class=postedThread>Your posted thread:</p>" . "Title: " . $_POST["title"] . "<br>" . "Description: " . $_POST["descr"] . "<br>" . "Filename: " . $_POST["uploadedFile"] . "<br><br>";
     
     /*
     if ($result->num_rows > 0) {
@@ -86,8 +85,7 @@ INSERT INTO users (fname, lname, username, pass, pfp, time) VALUES ('Gabriel', '
 CREATE TABLE threads (
     username varchar(60),
     title TINYTEXT,
-    descr TINYTEXT,
-    contactInfo varchar(50),
+    descr varchar(50),
     uploadedFile varchar(100),
     uploadTime timestamp);
 
