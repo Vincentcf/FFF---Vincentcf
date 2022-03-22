@@ -1,5 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <!--===============================================================================================-->
+<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
 <body>
 
 <?php
@@ -82,39 +100,31 @@ $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
 
-if (!empty($_POST['fname']) && !empty($_POST['lname']) && !empty($_POST['username']) && !empty($_POST['password'])){
-
-  echo'hello';
-
-} else {
-
-  header("Location: main.php", TRUE);
-  $_SESSION["Failed"] = "filledOut";
-
-}
-
 // Does a few checks to make sure image is suitable
 $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
 
-// if (isset)
+
 
 // Checks it's real image
 if($check == false) {
 
-  header("Location: signup.php", TRUE);
+  header("Location: main.php", TRUE);
   $_SESSION["Failed"] = "falsecheck";
+  $_SESSION['signupcheck'] = "falsecheck";
 
   // Check it's not too big
 } else if ($_FILES["fileToUpload"]["size"] > 500000){
 
-  header("Location: signup.php", TRUE);
+  header("Location: main.php", TRUE);
   $_SESSION["Failed"] = "size";
+  $_SESSION['signupcheck'] = "falsecheck";
 
   // Only allow JPG, JPEG, PNG & GIF
 } else if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
 
-  header("Location: signup.php", TRUE);
+  header("Location: main.php", TRUE);
   $_SESSION["Failed"] = "format";
+  $_SESSION['signupcheck'] = "falsecheck";
 
 } else {
 
@@ -139,3 +149,17 @@ if($check == false) {
   return;
 
 }
+?>
+
+<!--===============================================================================================-->
+<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+	<script src="js/contact.js"></script>
+
+</body>

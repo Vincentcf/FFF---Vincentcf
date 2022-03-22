@@ -11,7 +11,7 @@
 <?php
 session_start();
 
-if (isset($_POST['login']) or $_SESSION["password"] == "wrong") { // Displays Login form when the button gets a value
+if (isset($_POST['login'])) { // Displays Login form when the button gets a value
 
   $_SESSION["Value"] = "login";
 
@@ -45,39 +45,38 @@ if (isset($_POST['login']) or $_SESSION["password"] == "wrong") { // Displays Lo
   }
 
 
-} elseif (isset($_POST['signup'])) { // Displays signup form when the button gets a value
+} elseif (isset($_POST['signup']) or isset($_SESSION['signupcheck'])) { // Displays signup form when the button gets a value
 
-  $_SESSION["Value"] = "signup";
+  $_SESSION["Value"] = "signup"; 
  
   echo '
   <form action="forumskript.php" method="post" enctype="multipart/form-data">
     First Name:<br>
-    <input type="text" id="fname" name="fname">
+    <input type="text" id="fname" name="fname" required>
     <br><br>
     Last Name:<br>
-    <input type="text" id="lname" name="lname">
+    <input type="text" id="lname" name="lname" required>
     <br><br>
     Username: <br>
-    <input type="text" id="username" name="username">
+    <input type="text" id="username" name="username" required>
     <br><br>
     Password:<br>
-    <input type="password" id="password" name="password">
+    <input type="password" id="password" name="password" required>
     <br><br>
     Profile Picture:
-    <input type="file" name="fileToUpload" value="Select file" id="fileToUpload">
+    <input type="file" name="fileToUpload" value="Select file" id="fileToUpload" required>
     <br><br>
-    <input type="submit" value="Register">
+    <input type="submit" name="register" value="Register">
   </form><br><br>
   <form method="post">
     <input type="submit" id="login" name="login" value="Log In"> 
   </form>';
-
   // Does different checks to make sure image is allowed
   if (isset($_SESSION["Failed"])){
 
-    if ($_SESSION["Failed"] == "falsecheck"){ // Checks if file is an image
+    if ($_SESSION["Failed"] == "filledOut"){ // Only allows certain formats
 
-        echo "<h3 style='color:red'>File is not an image</h3>";
+      echo "<h3 style='color:red'>Make sure to fill out entire form</h3>";
 
     } else if ($_SESSION["Failed"] == "size"){ // Checks so file is not too big
 
@@ -87,9 +86,9 @@ if (isset($_POST['login']) or $_SESSION["password"] == "wrong") { // Displays Lo
 
         echo "<h3 style='color:red'>Only JPG, JPEG, PNG & GIF files are allowed</h3>";
         
-    } else if ($_SESSION["Failed"] == "fillOut"){ // Only allows certain formats
+    } else if ($_SESSION["Failed"] == "falsecheck"){ // Checks if file is an image
 
-      echo "<h3 style='color:red'>Make sure to fill out entire form</h3>";
+      echo "<h3 style='color:red'>File is not an image</h3>";
       
     } else {
 
@@ -112,9 +111,20 @@ if (isset($_POST['login']) or $_SESSION["password"] == "wrong") { // Displays Lo
 }
 
 $_SESSION["Failed"] = "false";
+unset($_SESSION['signupcheck']);
 
 ?>
 
+<!--===============================================================================================-->
+<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+	<script src="js/contact.js"></script>
 
 </body>
 </html>

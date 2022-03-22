@@ -26,13 +26,13 @@ echo '<h1>Welcome</h1>';
 
 echo 'You are logged in as: ' . '<b>' . $_SESSION['loginname'] . "<br>" .  "Username: " . $_SESSION["username"] . '<b><br><br>';
 
-
+$username = $_SESSION["username"];
 $title = $_POST["title"];
 $descr = $_POST["descr"];
 $contactInfo = $_POST["contactInfo"];
 $uploadedFile = $_POST["uploadedFile"];
-$sql = "INSERT INTO threads (title, descr, contactInfo, uploadedFile) 
-        VALUES ('$title', '$descr', '$contactInfo', '$uploadedFile')";
+$sql = "INSERT INTO threads (username, title, descr, contactInfo, uploadedFile) 
+        VALUES ('$username', '$title', '$descr', '$contactInfo', '$uploadedFile')";
 $conn->query($sql);
 
 
@@ -84,8 +84,9 @@ INSERT INTO users (fname, lname, username, pass, pfp, time) VALUES ('Gabriel', '
 
 
 CREATE TABLE threads (
+    username varchar(60),
     title TINYTEXT,
-    description TEXT(255),
+    descr TINYTEXT,
     contactInfo varchar(50),
     uploadedFile varchar(100),
     uploadTime timestamp);
