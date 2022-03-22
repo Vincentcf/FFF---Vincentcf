@@ -11,17 +11,17 @@
 <?php
 session_start();
 
-if (isset($_POST['login'])) { // Displays Login form when the button gets a value
+if (isset($_POST['login']) or isset($_SESSION['logincheck'])) { // Displays Login form when the button gets a value
 
   $_SESSION["Value"] = "login";
 
   echo '
   <form action="forumskript.php" method="post">
     Username:<br>
-    <input type="text" name="username">
+    <input type="text" name="username" required>
     <br><br>
     Password:<br>
-    <input type="password" name="password">
+    <input type="password" name="password" required>
     <br><br> 
     <input type="submit" value="Log In">
   </form>
@@ -31,13 +31,10 @@ if (isset($_POST['login'])) { // Displays Login form when the button gets a valu
     <input type="submit" id="signup" name="signup" value="Sign up">
   </form>';
 
-  $_SESSION["password"] = "true";
-
   if (isset($_SESSION["Failed"]) && $_SESSION["Failed"] == "true"){
 
     echo "<h3 style='color:red'>Wrong username or password!</h3>";
-    
-   
+  
   } else {
 
     return;
@@ -47,21 +44,21 @@ if (isset($_POST['login'])) { // Displays Login form when the button gets a valu
 
 } elseif (isset($_POST['signup']) or isset($_SESSION['signupcheck'])) { // Displays signup form when the button gets a value
 
-  $_SESSION["Value"] = "signup"; 
+  $_SESSION["Value"] = "signup";
  
   echo '
   <form action="forumskript.php" method="post" enctype="multipart/form-data">
     First Name:<br>
-    <input type="text" id="fname" name="fname" required>
+    <input type="text" name="fname" required>
     <br><br>
     Last Name:<br>
-    <input type="text" id="lname" name="lname" required>
+    <input type="text" name="lname" required>
     <br><br>
     Username: <br>
-    <input type="text" id="username" name="username" required>
+    <input type="text" name="username" required>
     <br><br>
     Password:<br>
-    <input type="password" id="password" name="password" required>
+    <input type="password" name="password" required>
     <br><br>
     Profile Picture:
     <input type="file" name="fileToUpload" value="Select file" id="fileToUpload" required>
@@ -71,12 +68,13 @@ if (isset($_POST['login'])) { // Displays Login form when the button gets a valu
   <form method="post">
     <input type="submit" id="login" name="login" value="Log In"> 
   </form>';
+
   // Does different checks to make sure image is allowed
   if (isset($_SESSION["Failed"])){
 
-    if ($_SESSION["Failed"] == "filledOut"){ // Only allows certain formats
+    if ($_SESSION["Failed"] == "falsecheck"){ // Checks if file is an image
 
-      echo "<h3 style='color:red'>Make sure to fill out entire form</h3>";
+        echo "<h3 style='color:red'>File is not an image</h3>";
 
     } else if ($_SESSION["Failed"] == "size"){ // Checks so file is not too big
 
@@ -86,10 +84,6 @@ if (isset($_POST['login'])) { // Displays Login form when the button gets a valu
 
         echo "<h3 style='color:red'>Only JPG, JPEG, PNG & GIF files are allowed</h3>";
         
-    } else if ($_SESSION["Failed"] == "falsecheck"){ // Checks if file is an image
-
-      echo "<h3 style='color:red'>File is not an image</h3>";
-      
     } else {
 
         return;
@@ -112,19 +106,10 @@ if (isset($_POST['login'])) { // Displays Login form when the button gets a valu
 
 $_SESSION["Failed"] = "false";
 unset($_SESSION['signupcheck']);
+unset($_SESSION['logincheck']);
 
 ?>
 
-<!--===============================================================================================-->
-<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-	<script src="js/main.js"></script>
-	<script src="js/contact.js"></script>
 
 </body>
 </html>
