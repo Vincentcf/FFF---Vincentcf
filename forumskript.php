@@ -35,8 +35,8 @@ if ($result->num_rows > 0) {
     $login_success = "true";
 
     $_SESSION['loginname'] = $row["fname"] . " " . $row["lname"];
-    $_SESSION["username"] = $row["username"];
-
+    $_SESSION['username'] = $row["username"];
+    $_SESSION['username'] = $_POST["username"];
     } 
 
   }
@@ -51,10 +51,8 @@ if ($login_success == "true") {
 } else {
 
   header("Location: main.php", TRUE);
-
-  $_SESSION["password"] = "wrong";
-
   $_SESSION["Failed"] = "true";
+  $_SESSION['logincheck'] = "true";
 
 }
 
@@ -82,39 +80,29 @@ $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
 
-if (!empty($_POST['fname']) && !empty($_POST['lname']) && !empty($_POST['username']) && !empty($_POST['password'])){
-
-  echo'hello';
-
-} else {
-
-  header("Location: main.php", TRUE);
-  $_SESSION["Failed"] = "filledOut";
-
-}
-
 // Does a few checks to make sure image is suitable
 $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-
-// if (isset)
 
 // Checks it's real image
 if($check == false) {
 
-  header("Location: signup.php", TRUE);
+  header("Location: main.php", TRUE);
   $_SESSION["Failed"] = "falsecheck";
+  $_SESSION['signupcheck'] = "falsecheck";
 
   // Check it's not too big
 } else if ($_FILES["fileToUpload"]["size"] > 500000){
 
-  header("Location: signup.php", TRUE);
+  header("Location: main.php", TRUE);
   $_SESSION["Failed"] = "size";
+  $_SESSION['signupcheck'] = "falsecheck";
 
   // Only allow JPG, JPEG, PNG & GIF
 } else if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
 
-  header("Location: signup.php", TRUE);
+  header("Location: main.php", TRUE);
   $_SESSION["Failed"] = "format";
+  $_SESSION['signupcheck'] = "falsecheck";
 
 } else {
 
