@@ -42,7 +42,7 @@ if ($result->num_rows > 0) {
   }
 
 }
-
+  
 if ($login_success == "true") {
 
   header("Location: index.php", TRUE);
