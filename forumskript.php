@@ -50,8 +50,9 @@ if ($login_success == "true") {
 
 } else {
 
-  header("Location: login.php", TRUE);
+  header("Location: main.php", TRUE);
   $_SESSION["Failed"] = "true";
+  $_SESSION['logincheck'] = "true";
 
 }
 
@@ -85,20 +86,23 @@ $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
 // Checks it's real image
 if($check == false) {
 
-  header("Location: signup.php", TRUE);
+  header("Location: main.php", TRUE);
   $_SESSION["Failed"] = "falsecheck";
+  $_SESSION['signupcheck'] = "falsecheck";
 
   // Check it's not too big
 } else if ($_FILES["fileToUpload"]["size"] > 500000){
 
-  header("Location: signup.php", TRUE);
+  header("Location: main.php", TRUE);
   $_SESSION["Failed"] = "size";
+  $_SESSION['signupcheck'] = "falsecheck";
 
   // Only allow JPG, JPEG, PNG & GIF
 } else if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
 
-  header("Location: signup.php", TRUE);
+  header("Location: main.php", TRUE);
   $_SESSION["Failed"] = "format";
+  $_SESSION['signupcheck'] = "falsecheck";
 
 } else {
 
