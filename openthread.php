@@ -59,12 +59,33 @@ $servername = "localhost";
     $DBname = "forum";
     $conn = new mysqli($servername, $username, $password, $DBname);
 	
+	$html = file_get_contents("openthread.html");
+	$text_array = explode("***PHP***", $html);
+	echo $text_array[0];
 
 	$title = $_POST["title"];
 	$username = $_POST["username"];
+	$descr = $_POST["descr"];
+	$uploadedFile = $_POST["uploadedFile"];
 	$sql = "SELECT * FROM threads";
 
-	echo "Poster: " . $_POST["username"] . "<br><br> Title: ". $_POST["title"];
+	
+		  /*  $title = array($row["title"]);
+			$username = array($row["username"]); */
+			/*$username = array($row["username"]);*/
+		   /* $uploadTime = array($row["uploadTime"]);*/
+		   /* array_push($row["title"], $row["username"], $row["uploadTime"]); */
+
+		   $text = str_replace("***title***",$_POST["title"],$text_array[1]);
+		   $text = str_replace("***username***",$_POST["username"],$text);
+		   $text = str_replace("***descr***",$_POST["descr"],$text);
+		   $text = str_replace("***uploadedfile***",$_POST["uploadedFile"],$text);
+		   echo $text;
+		
+	echo $text_array[2];
+	
+
+	echo "<br><br>" . "Poster: " . $_POST["username"] . "<br><br> Title: ". $_POST["title"];
 
 
 
