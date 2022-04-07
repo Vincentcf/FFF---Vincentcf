@@ -41,6 +41,8 @@
    
     echo '<h1>Welcome</h1>';
     echo 'You are logged in as: ' . '<b>' . $_SESSION['loginname'] . "</b> <br>" .  "Username: <b>" . $_SESSION['username'] . '</b><br><br>';
+	$imgUrl = "pfp/". $_SESSION["username"] . ".png";
+	echo "<img src='" . $imgUrl . "'>";
 
 	if(isset($_POST['logout'])){
 		session_destroy();
