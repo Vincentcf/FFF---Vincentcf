@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -72,7 +71,11 @@ if (isset($_POST['login']) or isset($_SESSION['logincheck'])) { // Displays Logi
   // Does different checks to make sure image is allowed
   if (isset($_SESSION["Failed"])){
 
-    if ($_SESSION["Failed"] == "falsecheck"){ // Checks if file is an image
+    if ($_SESSION["Failed"] == "name"){
+
+      echo "<h3 style='color:red'>Username already exists</h3>"; // Checks if username already exists
+
+    } else if ($_SESSION["Failed"] == "falsecheck"){ // Checks if file is an image
 
         echo "<h3 style='color:red'>File is not an image</h3>";
 
@@ -99,7 +102,6 @@ if (isset($_POST['login']) or isset($_SESSION['logincheck'])) { // Displays Logi
       <input type="submit" id="login" name="login" value="Login">
       <br><br>
       <input type="submit" id="signup" name="signup" value="Sign up">
-
   </form>';
   
 }
