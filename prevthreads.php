@@ -16,7 +16,7 @@ $result = $conn->query($sql);
 $count = 0;
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-    $title = array($row["title"], $row["username"], $row["uploadTime"]);
+    $title = array($row["title"], $row["username"], $row["uploadTime"], $row["descr"], $row["uploadedFile"]);
       /*  $title = array($row["title"]);
         $username = array($row["username"]); */
         /*$username = array($row["username"]);*/
@@ -28,13 +28,15 @@ if ($result->num_rows > 0) {
             $text = str_replace("***number***",$count,$text);
             $text = str_replace("***username***",$row["username"],$text);
             $text = str_replace("***uploadTime***",$row["uploadTime"],$text);
+            $text = str_replace("***uploadedFile***",$row["uploadedFile"],$text);
+            $text = str_replace("***descr***",$row["descr"],$text);
             echo $text;
             break;
         }
 
     }
 } else {
-    echo "If sats inte funka";
+    echo "if-sats funkar ej på rad 17";
 }
     
 echo $text_array[2];

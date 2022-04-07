@@ -35,21 +35,6 @@
 
 <br><br><br> 
 
-<div class="container">
-	<div class="row">
-		<h1>thread title</h1>
-		<div class="col">
-		<p> username of poster</p>
-		</div>
-		<div class="col">
-
-		</div>
-		<div class="col">
-			
-		</div>
-	</div>
-</div>
-
 
 <?php
 session_start();
@@ -79,7 +64,7 @@ $servername = "localhost";
 		   $text = str_replace("***title***",$_POST["title"],$text_array[1]);
 		   $text = str_replace("***username***",$_POST["username"],$text);
 		   $text = str_replace("***descr***",$_POST["descr"],$text);
-		   $text = str_replace("***uploadedfile***",$_POST["uploadedFile"],$text);
+		   $text = str_replace("***uploadedFile***",$_POST["uploadedFile"],$text);
 		   echo $text;
 		
 	echo $text_array[2];

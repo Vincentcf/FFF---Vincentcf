@@ -23,3 +23,8 @@ th{
     font-size: 20px;
     font-style: oblique;
 }
+
+h1{
+    margin-left: 50%;
+    color:red;
+}
