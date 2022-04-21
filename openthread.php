@@ -70,9 +70,6 @@ $servername = "localhost";
 	echo $text_array[2];
 	
 
-	echo "<br><br>" . "Poster: " . $_POST["username"] . "<br><br> Title: ". $_POST["title"];
-
-
 
 ?>
 

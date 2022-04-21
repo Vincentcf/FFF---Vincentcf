@@ -27,3 +27,18 @@ th{
 h1{
     color:white;
 }
+
+.pfp {
+    width:100%;
+    border-radius: 40%;
+}
+.profilepic {
+    width:100%;
+    margin:1%;
+    max-width:175px;
+    border-radius: 20%;
+}
+
+.body{
+    align-content: center;
+}
