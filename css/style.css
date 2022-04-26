@@ -42,3 +42,7 @@ h1{
 .body{
     align-content: center;
 }
+
+.user-class{
+    font-size: 0.70rem;
+}
