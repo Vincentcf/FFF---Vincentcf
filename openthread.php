@@ -29,11 +29,11 @@
 
 </head>
 <body>
-<h5> Open thread page. Page for reading a specifically chosen thread from "prevthreads.php"</h5> <br>
+<h5 style="color:white;"> Open thread page. Page for reading a specifically chosen thread from "prevthreads.php"</h5> <br>
 
 <a class="btn btn-primary" href="prevthreads.php" role="button"><- Go back</a>
 
-<br><br><br> 
+<br><br><br>	
 
 
 <?php
@@ -43,7 +43,7 @@ $servername = "localhost";
     $password = "";
     $DBname = "forum";
     $conn = new mysqli($servername, $username, $password, $DBname);
-	
+
 	$html = file_get_contents("openthread.html");
 	$text_array = explode("***PHP***", $html);
 	echo $text_array[0];
