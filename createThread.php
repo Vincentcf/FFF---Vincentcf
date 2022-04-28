@@ -90,6 +90,15 @@ CREATE TABLE threads (
     uploadTime timestamp);
 
 INSERT INTO threads (title, description, contactInfo, uploadedFile, uploadTime) VALUES ('test title', 'test description', 'test contact info', 'test_file.jpg', NOW());
+
+
+CREATE TABLE comments (
+    username varchar(60),
+    userComment varchar(250),
+    threadTitle TINYTEXT);
+
+INSERT INTO comments (username, userComment, threadTitle) VALUES ('test username', 'this is a userComment test', 'TEST threadTitle TEST');
+
 */
 
 ?>

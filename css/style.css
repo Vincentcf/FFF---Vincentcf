@@ -43,6 +43,7 @@ h1{
     align-content: center;
 }
 
-.user-class{
+.userClass{
     font-size: 0.70rem;
+    color: rgb(227, 227, 227);
 }

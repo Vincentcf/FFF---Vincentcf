@@ -52,7 +52,7 @@ $servername = "localhost";
 	$username = $_POST["username"];
 	$descr = $_POST["descr"];
 	$uploadedFile = $_POST["uploadedFile"];
-	$sql = "SELECT * FROM threads";
+	
 
 	
 		  /*  $title = array($row["title"]);
@@ -61,14 +61,42 @@ $servername = "localhost";
 		   /* $uploadTime = array($row["uploadTime"]);*/
 		   /* array_push($row["title"], $row["username"], $row["uploadTime"]); */
 
-		   $text = str_replace("***title***",$_POST["title"],$text_array[1]);
-		   $text = str_replace("***username***",$_POST["username"],$text);
-		   $text = str_replace("***descr***",$_POST["descr"],$text);
-		   $text = str_replace("***uploadedFile***",$_POST["uploadedFile"],$text);
-		   echo $text;
-		
-	echo $text_array[2];
-	
+		   $x = 1;
+		   if ($x == 1){
+			$sql = "SELECT * FROM threads";
+			$text = str_replace("***title***",$_POST["title"],$text_array[1]);
+			$text = str_replace("***username***",$_POST["username"],$text);
+			$text = str_replace("***descr***",$_POST["descr"],$text);
+			$text = str_replace("***uploadedFile***",$_POST["uploadedFile"],$text);
+			echo $text;
+			echo $text_array[2];
+			session_write_close();
+			return;
+		   } 
+		   else {
+			   echo "<p1 style='color:blue;'> IF SATSEN FUNKAR EJ </p";
+		   }
+
+		   $xy = 2;
+		   if ($xy == 2){
+			   $sql = "SELECT * FROM comments";
+			   $result = $conn->query($sql);
+			   if ($result->num_rows > 0) {
+				   echo "Nonzero number of rows...";
+				// output data of each row
+				while($row = $result->fetch_assoc()) {
+					$text = str_replace("***username***",$row["username"],$text_array[1]);
+					$text = str_replace("***userComment***",$row["userComment"],$text);
+					echo $text;
+	 
+				}
+			  } else {
+				echo "0 results";
+			  }
+			  echo $text_array[2];
+			  echo "test";
+			   echo "<br><br><br>" . "<p1 style='color:red;'> TESTETSTT XY == 2</p>";
+		   }
 
 
 ?>
