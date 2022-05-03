@@ -63,43 +63,88 @@ $servername = "localhost";
 
 		   $x = 1;
 		   if ($x == 1){
-			$sql = "SELECT * FROM threads";
+			$sql = "SELECT * FROM comments WHERE threadTitle = '" . $title . "';";
+			//$sql = "SELECT * FROM threads FULL OUTER JOIN comments ON A.Key = B.Key";
 			$text = str_replace("***title***",$_POST["title"],$text_array[1]);
 			$text = str_replace("***username***",$_POST["username"],$text);
 			$text = str_replace("***descr***",$_POST["descr"],$text);
 			$text = str_replace("***uploadedFile***",$_POST["uploadedFile"],$text);
+			
+			$btn = '<button class="btn btn-outline-info" type="button" onClick="commentFunction()">' . 'Add comment' . '</button>';
+			$text = str_replace("***commentButton***",$btn,$text_array[1]);
 			echo $text;
-			echo $text_array[2];
-			session_write_close();
-			return;
+			
+			/* session_write_close(); */
+			
+			$result = $conn->query($sql);
+			if ($result->num_rows > 0) {
+				echo "Nonzero number of rows...";
+				// output data of each row
+				while($row = $result->fetch_assoc()) {
+					$comment = array($row["username"], $row["userComment"]);
+					foreach($comment as $zyxwx){
+						$text = str_replace("***username***",$row["username"],$text_array[1]);
+						$text = str_replace("***userComment***",$row["userComment"],$text);
+						echo $text;
+					}
+				}
+
+				return;
+			}
+			else {
+				echo "Ännu inga kommentarer i denna tråd!";
+			}
 		   } 
 		   else {
 			   echo "<p1 style='color:blue;'> IF SATSEN FUNKAR EJ </p";
 		   }
 
-		   $xy = 2;
-		   if ($xy == 2){
-			   $sql = "SELECT * FROM comments";
-			   $result = $conn->query($sql);
-			   if ($result->num_rows > 0) {
-				   echo "Nonzero number of rows...";
-				// output data of each row
-				while($row = $result->fetch_assoc()) {
-					$text = str_replace("***username***",$row["username"],$text_array[1]);
-					$text = str_replace("***userComment***",$row["userComment"],$text);
-					echo $text;
-	 
-				}
-			  } else {
-				echo "0 results";
-			  }
-			  echo $text_array[2];
-			  echo "test";
-			   echo "<br><br><br>" . "<p1 style='color:red;'> TESTETSTT XY == 2</p>";
-		   }
+		   $btn = '<button class="btn btn-outline-info" type="button">' . 'Add comment' . '</button>';
+		   $text = str_replace("***commentButton***",$btn,$text_array[1]);
+		   echo $btn_replace;
 
 
+// SELECT * FROM comments INNER JOIN threads ON comments.threadTitle = threads.title;
 ?>
+
+<script type="text/javascript">
+	<?php
+	$sql = "INSERT INTO comments (username, userComment, threadTitle)
+	VALUES
+	('$_SESSION['username']', '$_POST[userComment]', '$_POST['threadTitle']')";
+//SKAPA createComment.php KANSKE, fixa så att kommentaren som skapas är associerad med rätt thread och dess titel.
+	
+	?>
+</script>
+
+
+<!--
+session_start();
+$xy = 2;
+if ($xy == 2){
+	$sql = "SELECT * FROM comments";
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0) {
+		echo "Nonzero number of rows...";
+	 // output data of each row
+	 while($row = $result->fetch_assoc()) {
+		 $comment = array($row["username"], $row["userComment"]);
+		 foreach($comment as $zyxwx){
+		 $text = str_replace("***username***",$row["username"],$text_array[1]);
+		 $text = str_replace("***userComment***",$row["userComment"],$text);
+		 echo $text;
+	 }
+ }
+} else {
+	 echo "0 results";
+	 echo "<script> alert('test') </script>";
+   }
+   echo $text_array[2];
+   echo "test";
+	echo "<br><br><br>" . "<p1 style='color:blue;'> TESTETSTT XY == 2</p>";
+}
+-->
+
 
 
 <!--===============================================================================================-->
