@@ -27,18 +27,13 @@
 
     <link rel="stylesheet" href="css/style.css">
 
-	<!-- NAVBAR BOOTSTRAP -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <!-- NAVBAR BOOTSTRAP -->
 </head>
 <body>
-<h5> Open thread page. Page for reading a specifically chosen thread from "prevthreads.php"</h5> <br>
+<h5 style="color:white;"> Open thread page. Page for reading a specifically chosen thread from "prevthreads.php"</h5> <br>
 
 <a class="btn btn-primary" href="prevthreads.php" role="button"><- Go back</a>
 
-<br><br><br> 
-
-
+<br><br><br>	
 
 
 <?php
@@ -48,58 +43,108 @@ $servername = "localhost";
     $password = "";
     $DBname = "forum";
     $conn = new mysqli($servername, $username, $password, $DBname);
-	
+
+	$html = file_get_contents("openthread.html");
+	$text_array = explode("***PHP***", $html);
+	echo $text_array[0];
 
 	$title = $_POST["title"];
 	$username = $_POST["username"];
-	$sql = "SELECT * FROM threads";
+	$descr = $_POST["descr"];
+	$uploadedFile = $_POST["uploadedFile"];
+	
 
-	echo "Poster: " . $_POST["username"] . "<br><br> Title: ". $_POST["title"];
+	
+		  /*  $title = array($row["title"]);
+			$username = array($row["username"]); */
+			/*$username = array($row["username"]);*/
+		   /* $uploadTime = array($row["uploadTime"]);*/
+		   /* array_push($row["title"], $row["username"], $row["uploadTime"]); */
 
-echo '<!-- navbarmeny sektion start-->
-<section>
-  <h2 class="section_hidden_header">.</h2>
-<div class="container-fluid p-0 mh-100"> 
-  <nav class="navbar my-custom-navbar-1 navbar-expand-lg navbar-dark">
-	  <a href="index.html" class="navbar-brand ">CompanyName</a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#toggle" aria-controls="toggle" aria-expanded="false" aria-label="Toggle navigation">
-		  <span class="navbar-toggler-icon"></span>
-	  </button>
-	  <div class="collapse navbar-collapse" id="toggle"> 
-		   
-	  <ul class="navbar-nav ml-auto">
-		 
-		  <li class="nav-item nav_login_item d-flex"> 
-			  <a class="nav_login_link" href="signup.html"><i class="fas fa-user"></i> Sign Up</a>
-		  </li>
-		  <li class="nav-item">
-			 <a href="contact.html" class="btn btn-outline-info mr-2 nav_contact_btn ">Contact <i class="far fa-envelope"></i> </a>
-		  </li>
-		</ul>
-		  <form class="d-flex nav_search_bar">
-			  <input class="form-control me-2 mr-1" type="search" placeholder="Search" aria-label="Search">
-			  <button class="fas fa-search btn btn-outline-secondary" type="submit"></button>
-			</form>
-	  
-	  </div>
-  </nav>
-</div> 
-	  
-  
-  
-	<!-- De större navigeringsknapparna i undre delen-->
-  <div class="container-fluid container_bottom_nav d-flex justify-content-center"> 
-		  <div class="btn-group custom-btn-group" role="group" aria-label="Button group with nested dropdown">
-			<a href="builder.html" class="col-lg-4 btn btn_navbar_1 "><i class="fas fa-tools"></i>System Builder</a> 
-			<a href="#" class="col-lg-4 btn btn_navbar_1"><i class="fas fa-check-square"></i>Finished Builds</a>
-			<a href="#other_products_hyperlink_position" class="col-lg-4 btn btn_navbar_1 ">Other Products <i class="fas fa-arrow-down"></i></a>
-			</div>
-  </div>
-  </section>
-  <!--navbarmeny sektion stopp-->'
+		   $x = 1;
+		   if ($x == 1){
+			$sql = "SELECT * FROM comments WHERE threadTitle = '" . $title . "';";
+			//$sql = "SELECT * FROM threads FULL OUTER JOIN comments ON A.Key = B.Key";
+			$text = str_replace("***title***",$_POST["title"],$text_array[1]);
+			$text = str_replace("***username***",$_POST["username"],$text);
+			$text = str_replace("***descr***",$_POST["descr"],$text);
+			$text = str_replace("***uploadedFile***",$_POST["uploadedFile"],$text);
+			
+			$btn = '<button class="btn btn-outline-info" type="button" onClick="commentFunction()">' . 'Add comment' . '</button>';
+			$text = str_replace("***commentButton***",$btn,$text_array[1]);
+			echo $text;
+			
+			/* session_write_close(); */
+			
+			$result = $conn->query($sql);
+			if ($result->num_rows > 0) {
+				echo "Nonzero number of rows...";
+				// output data of each row
+				while($row = $result->fetch_assoc()) {
+					$comment = array($row["username"], $row["userComment"]);
+					foreach($comment as $zyxwx){
+						$text = str_replace("***username***",$row["username"],$text_array[1]);
+						$text = str_replace("***userComment***",$row["userComment"],$text);
+						echo $text;
+					}
+				}
+
+				return;
+			}
+			else {
+				echo "Ännu inga kommentarer i denna tråd!";
+			}
+		   } 
+		   else {
+			   echo "<p1 style='color:blue;'> IF SATSEN FUNKAR EJ </p";
+		   }
+
+		   $btn = '<button class="btn btn-outline-info" type="button">' . 'Add comment' . '</button>';
+		   $text = str_replace("***commentButton***",$btn,$text_array[1]);
+		   echo $btn_replace;
 
 
+// SELECT * FROM comments INNER JOIN threads ON comments.threadTitle = threads.title;
 ?>
+
+<script type="text/javascript">
+	<?php
+	$sql = "INSERT INTO comments (username, userComment, threadTitle)
+	VALUES
+	('$_SESSION['username']', '$_POST[userComment]', '$_POST['threadTitle']')";
+//SKAPA createComment.php KANSKE, fixa så att kommentaren som skapas är associerad med rätt thread och dess titel.
+	
+	?>
+</script>
+
+
+<!--
+session_start();
+$xy = 2;
+if ($xy == 2){
+	$sql = "SELECT * FROM comments";
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0) {
+		echo "Nonzero number of rows...";
+	 // output data of each row
+	 while($row = $result->fetch_assoc()) {
+		 $comment = array($row["username"], $row["userComment"]);
+		 foreach($comment as $zyxwx){
+		 $text = str_replace("***username***",$row["username"],$text_array[1]);
+		 $text = str_replace("***userComment***",$row["userComment"],$text);
+		 echo $text;
+	 }
+ }
+} else {
+	 echo "0 results";
+	 echo "<script> alert('test') </script>";
+   }
+   echo $text_array[2];
+   echo "test";
+	echo "<br><br><br>" . "<p1 style='color:blue;'> TESTETSTT XY == 2</p>";
+}
+-->
+
 
 
 <!--===============================================================================================-->
@@ -122,15 +167,10 @@ echo '<!-- navbarmeny sektion start-->
 	  window.dataLayer = window.dataLayer || [];
 	  function gtag(){dataLayer.push(arguments);}
 	  gtag('js', new Date());
+
 	  gtag('config', 'UA-23581568-13');
 	</script>
 -->
-
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-        
 
 </body>
 </html>
