@@ -3,10 +3,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Forum För Fårskallar</title>
 </head>
 <body>
-
 <?php
 session_start();
 
@@ -20,13 +19,26 @@ if (isset($_POST['login']) or isset($_SESSION['logincheck'])) { // Displays Logi
     <input type="text" name="username" required>
     <br><br>
     Password:<br>
-    <input type="password" name="password" required>
+    <input type="password" name="password" id="pass" required>
     <br><br> 
+    <input type="checkbox" onclick="myFunction()">Show Password<br><br>
     <input type="submit" value="Log In">
+    
+    <script>
+        function myFunction() {
+        var x = document.getElementById("pass");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+    </script>
   </form>
   <br><br>
   
   <form method="post">
+    Create an account?<br><br>
     <input type="submit" id="signup" name="signup" value="Sign up">
   </form>';
 
@@ -57,7 +69,8 @@ if (isset($_POST['login']) or isset($_SESSION['logincheck'])) { // Displays Logi
     <input type="text" name="username" required>
     <br><br>
     Password:<br>
-    <input type="password" name="password" required>
+    <input type="password" name="password" id="pass" required><br>
+    <input type="checkbox" onclick="myFunction()">Show Password
     <br><br>
     Profile Picture:
     <input type="file" name="fileToUpload" value="Select file" id="fileToUpload" required>
@@ -65,8 +78,20 @@ if (isset($_POST['login']) or isset($_SESSION['logincheck'])) { // Displays Logi
     <input type="submit" name="register" value="Register">
   </form><br><br>
   <form method="post">
+    Already have an account?<br><br>
     <input type="submit" id="login" name="login" value="Log In"> 
-  </form>';
+  </form>
+  
+  <script>
+    function myFunction() {
+      var x = document.getElementById("pass");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+    }
+  }
+</script>';
 
   // Does different checks to make sure image is allowed
   if (isset($_SESSION["Failed"])){
@@ -111,7 +136,5 @@ unset($_SESSION['signupcheck']);
 unset($_SESSION['logincheck']);
 
 ?>
-
-
 </body>
 </html>
