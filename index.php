@@ -44,6 +44,7 @@
 	<div class="header"> 
 	<a href="profile.php">
 	<div class="profilepic float-right">
+	<h2> &nbsp; &nbsp; <u> Profile </u> </h2>
 	<img class="pfp" src=' . $imgUrl . '>
 	</a>
 	</div>

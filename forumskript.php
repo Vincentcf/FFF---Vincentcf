@@ -19,7 +19,6 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-
 $sql = "SELECT * FROM users";
 $result = $conn->query($sql);
 $login_success == "";
@@ -34,6 +33,10 @@ if ($result->num_rows > 0) {
 
     $login_success = "true";
 
+    $_SESSION['fname'] = $row["fname"];
+    $_SESSION['lname'] = $row["lname"];
+    $_SESSION['username'] = $row['username'];
+    $_SESSION['password'] = $row['pass'];
     $_SESSION['loginname'] = $row["fname"] . " " . $row["lname"];
     $_SESSION['username'] = $_POST["username"];
     } 
@@ -71,10 +74,12 @@ $fname = $_POST["fname"];
 $lname = $_POST["lname"];
 $username = $_POST["username"];
 $password = $_POST["password"];
+$_SESSION['fname'] = $_POST['fname'];
+$_SESSION['lname'] = $_POST['lname'];
+$_SESSION['password'] = $_POST['password'];
 $_SESSION['username'] = $_POST["username"];
 
 $pass = sha1($password);
-
 
 $target_dir = "pfp/"; // Sets folder as directory for profile pictures
 $uploaded_file =  basename($_FILES["fileToUpload"]["name"]); // Name of file
