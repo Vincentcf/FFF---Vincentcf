@@ -19,7 +19,6 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-
 $sql = "SELECT * FROM users";
 $result = $conn->query($sql);
 $login_success == "";
@@ -30,19 +29,22 @@ if ($result->num_rows > 0) {
 
   while($row = $result->fetch_assoc()) {
 
-  if($row["username"] == $_POST["username"] && $row["pass"] == $_POST["password"]) {
+  if($row["username"] == $_POST["username"] && $row["pass"] == sha1($_POST["password"])) {
 
     $login_success = "true";
 
+    $_SESSION['fname'] = $row["fname"];
+    $_SESSION['lname'] = $row["lname"];
+    $_SESSION['username'] = $row['username'];
+    $_SESSION['password'] = $row['pass'];
     $_SESSION['loginname'] = $row["fname"] . " " . $row["lname"];
-    $_SESSION['username'] = $row["username"];
     $_SESSION['username'] = $_POST["username"];
     } 
 
   }
 
 }
-  
+
 if ($login_success == "true") {
 
   header("Location: index.php", TRUE);
@@ -72,7 +74,12 @@ $fname = $_POST["fname"];
 $lname = $_POST["lname"];
 $username = $_POST["username"];
 $password = $_POST["password"];
+$_SESSION['fname'] = $_POST['fname'];
+$_SESSION['lname'] = $_POST['lname'];
+$_SESSION['password'] = $_POST['password'];
+$_SESSION['username'] = $_POST["username"];
 
+$pass = sha1($password);
 
 $target_dir = "pfp/"; // Sets folder as directory for profile pictures
 $uploaded_file =  basename($_FILES["fileToUpload"]["name"]); // Name of file
@@ -82,6 +89,26 @@ $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
 // Does a few checks to make sure image is suitable
 $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+
+$sql = "SELECT * FROM users";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+
+  while($row = $result->fetch_assoc()) {
+    
+    if($row["username"] == $_POST["username"]) {
+    
+      header("Location: main.php", TRUE);
+      $_SESSION["Failed"] = "name";
+      $_SESSION['signupcheck'] = "falsecheck";
+      return;
+    } 
+
+  }
+
+}
+
 
 // Checks it's real image
 if($check == false) {
@@ -110,11 +137,11 @@ if($check == false) {
   
   /* Changes name of picture to make each picture distinct */
   $old_name = $target_dir . $uploaded_file; 
-  $new_name = $target_dir . $username . $uploaded_file; 
+  $new_name = $target_dir . $username . ".png"; 
   rename( $old_name, $new_name);
 
   /* Inserts values into database */
-  $sql = "INSERT INTO users (fname, lname, username, pass, pfp, time) VALUES ('$fname', '$lname', '$username', '$password', '$new_name', NOW())"; 
+  $sql = "INSERT INTO users (fname, lname, username, pass, pfp, time) VALUES ('$fname', '$lname', '$username', '$pass', '$new_name', NOW())"; 
   $result = $conn->query($sql); 
   $_SESSION['loginname'] = $fname . " " . $lname;
   header("Location: index.php", TRUE);

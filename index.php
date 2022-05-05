@@ -22,6 +22,7 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
 <!--===============================================================================================-->
 
     <link rel="stylesheet" href="css/style.css">
@@ -38,9 +39,18 @@
     $DBname = "forum";
     $conn = new mysqli($servername, $username, $password, $DBname);
 
-   
-    echo '<h1>Welcome</h1>';
-    echo 'You are logged in as: ' . '<b>' . $_SESSION['loginname'] . "</b> <br>" .  "Username: <b>" . $_SESSION['username'] . '</b><br><br>';
+	$imgUrl = "pfp/". $_SESSION["username"] . ".png";
+    echo '
+	<div class="header"> 
+	<a href="profile.php">
+	<div class="profilepic float-right">
+	<h2> &nbsp; &nbsp; <u> Profile </u> </h2>
+	<img class="pfp" src=' . $imgUrl . '>
+	</a>
+	</div>
+	<h1>Welcome</h1><br> 
+	You are logged in as: <b>' .  $_SESSION['loginname'] . '</b> <br>' .  'Username: <b>' . $_SESSION['username'] . '</b><br><br>
+	</div>';
 
 	if(isset($_POST['logout'])){
 		session_destroy();
@@ -67,7 +77,7 @@
   }
 } 
 </script>
-
+	
 <!-- START OF Create new thread section -->
 <button type="button" onclick=myFunction() class="btn btn-outline-info btn-rounded" data-mdb-ripple-color="dark">Create new thread/post</button>
 

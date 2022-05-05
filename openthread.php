@@ -35,10 +35,20 @@
 
 <br><br><br>	
 
+<script type="text/javascript">
+    function addComment() {
+  var x = document.getElementById("formElement");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+} 
+</script>
 
 <?php
 session_start();
-$servername = "localhost";
+	$servername = "localhost";
     $username = "root";
     $password = "";
     $DBname = "forum";
@@ -52,7 +62,6 @@ $servername = "localhost";
 	$username = $_POST["username"];
 	$descr = $_POST["descr"];
 	$uploadedFile = $_POST["uploadedFile"];
-	
 
 	
 		  /*  $title = array($row["title"]);
@@ -70,8 +79,9 @@ $servername = "localhost";
 			$text = str_replace("***descr***",$_POST["descr"],$text);
 			$text = str_replace("***uploadedFile***",$_POST["uploadedFile"],$text);
 			
-			$btn = '<button class="btn btn-outline-info" type="button" onClick="commentFunction()">' . 'Add comment' . '</button>';
-			$text = str_replace("***commentButton***",$btn,$text_array[1]);
+			$btn = '<button class="btn btn-outline-info" type="button" onClick="addComment()">' . 'Add comment' . '</button>';
+			$text = str_replace("***commentButton***",$btn,$text);
+			
 			echo $text;
 			
 			/* session_write_close(); */
@@ -101,7 +111,7 @@ $servername = "localhost";
 
 		   $btn = '<button class="btn btn-outline-info" type="button">' . 'Add comment' . '</button>';
 		   $text = str_replace("***commentButton***",$btn,$text_array[1]);
-		   echo $btn_replace;
+		   
 
 
 // SELECT * FROM comments INNER JOIN threads ON comments.threadTitle = threads.title;
@@ -109,9 +119,31 @@ $servername = "localhost";
 
 <script type="text/javascript">
 	<?php
-	$sql = "INSERT INTO comments (username, userComment, threadTitle)
-	VALUES
-	('$_SESSION['username']', '$_POST[userComment]', '$_POST['threadTitle']')";
+	session_start();
+	$servername = "localhost";
+    $username = "root";
+    $password = "";
+    $DBname = "forum";
+    $conn = new mysqli($servername, $username, $password, $DBname);
+
+	function postComment(){
+		$usernamethread = $_SESSION['username'];
+		$userComment = $_POST['userComment'];
+		$threadTitle = $_POST['threadTitle'];
+	
+		$sql = "INSERT INTO comments (username, userComment, threadTitle)
+		VALUES
+		('$usernamethread', '$userComment', '$threadTitle')";
+		$result = $conn->query($sql);
+	}
+
+	if(array_key_exists('postComment', $_POST)) {
+		postComment();
+	}
+?>
+	
+	
+
 //SKAPA createComment.php KANSKE, fixa så att kommentaren som skapas är associerad med rätt thread och dess titel.
 	
 	?>

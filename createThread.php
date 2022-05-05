@@ -75,7 +75,7 @@ CREATE TABLE users (
     fname varchar(50),
     lname varchar(50),
     username varchar(60),
-    pass varchar(50),
+    pass varchar(100),
     pfp varchar(100),
     time timestamp);
 
@@ -85,7 +85,7 @@ INSERT INTO users (fname, lname, username, pass, pfp, time) VALUES ('Gabriel', '
 CREATE TABLE threads (
     username varchar(60),
     title TINYTEXT,
-    descr varchar(50),
+    descr varchar(250),
     uploadedFile varchar(100),
     uploadTime timestamp);
 
