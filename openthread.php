@@ -36,7 +36,7 @@
 <br><br><br>	
 
 <script type="text/javascript">
-    function addComment() {
+    function displayComment() {
   var x = document.getElementById("formElement");
   if (x.style.display === "block") {
     x.style.display = "none";
@@ -79,9 +79,8 @@ session_start();
 			$text = str_replace("***descr***",$_POST["descr"],$text);
 			$text = str_replace("***uploadedFile***",$_POST["uploadedFile"],$text);
 			
-			$btn = '<button class="btn btn-outline-info" type="button" onClick="addComment()">' . 'Add comment' . '</button>';
+			$btn = '<button class="btn btn-outline-info" type="button" onClick="displayComment()">' . 'Add comment' . '</button>';
 			$text = str_replace("***commentButton***",$btn,$text);
-			
 			echo $text;
 			
 			/* session_write_close(); */
@@ -92,11 +91,11 @@ session_start();
 				// output data of each row
 				while($row = $result->fetch_assoc()) {
 					$comment = array($row["username"], $row["userComment"]);
-					foreach($comment as $zyxwx){
-						$text = str_replace("***username***",$row["username"],$text_array[1]);
+					//foreach($comment as $zyxwx){
+						$text = str_replace("***username***",$row["username"],$text_array[2]);
 						$text = str_replace("***userComment***",$row["userComment"],$text);
 						echo $text;
-					}
+					//}
 				}
 
 				return;
@@ -109,45 +108,16 @@ session_start();
 			   echo "<p1 style='color:blue;'> IF SATSEN FUNKAR EJ </p";
 		   }
 
-		   $btn = '<button class="btn btn-outline-info" type="button">' . 'Add comment' . '</button>';
-		   $text = str_replace("***commentButton***",$btn,$text_array[1]);
-		   
-
+	
 
 // SELECT * FROM comments INNER JOIN threads ON comments.threadTitle = threads.title;
 ?>
 
-<script type="text/javascript">
-	<?php
-	session_start();
-	$servername = "localhost";
-    $username = "root";
-    $password = "";
-    $DBname = "forum";
-    $conn = new mysqli($servername, $username, $password, $DBname);
 
-	function postComment(){
-		$usernamethread = $_SESSION['username'];
-		$userComment = $_POST['userComment'];
-		$threadTitle = $_POST['threadTitle'];
-	
-		$sql = "INSERT INTO comments (username, userComment, threadTitle)
-		VALUES
-		('$usernamethread', '$userComment', '$threadTitle')";
-		$result = $conn->query($sql);
-	}
 
-	if(array_key_exists('postComment', $_POST)) {
-		postComment();
-	}
-?>
-	
-	
 
 //SKAPA createComment.php KANSKE, fixa så att kommentaren som skapas är associerad med rätt thread och dess titel.
 	
-	?>
-</script>
 
 
 <!--

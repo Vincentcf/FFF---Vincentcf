@@ -47,29 +47,29 @@
         <div class="d-flex align-items-end justify-content-center mt-3">
             ***commentButton***
         </div>
-        <div class="d-flex">
+
+
             <div id="formElement" class="bg-contact2">
-                <form class="contact2-form validate-form" action="#" method="post" name="formClass" >
-                <div class="wrap-input2 validate-input" data-validate = "Description is required">
-                    <textarea class="input2" name="descr" id="descrId"></textarea>
-                    <span class="focus-input2" data-placeholder="DESCRIPTION"></span>
+                <form  action="postComment.php" method="post">
+                <div class="wrap-input2 validate-input" data-validate = "Comment is required">
+                    <textarea class="input2" name="userComment" id="userCommentID"></textarea>
+                    <span class="focus-input2" data-placeholder="COMMENT HERE"></span>
                 </div>
                 <div class="container-contact2-form-btn">
                     <div class="wrap-contact2-form-btn">
-                        <div class="contact2-form-bgbtn"></div>
-                        <input type="submit" name="postComment" value="Post comment"/>
-                            
+                        <input type="hidden" name="title" id="titleID" value="***title***">
+                        <input type="submit" name="postComment" id="postCommentID" value="Post comment">
+                    
             
                     </div>
                 </div>
                 </form>
                 
                 </div>
-                
-        </div>
     </div>
 </div>
 
+***PHP***
 
 <div class="container-fluid d-flex p-4 justify-content-center mh-100 mw-100 w-100" style="background-color:blanchedalmond;">
     <div class="mh-100 d-inline-block p-3" style="height:400px; width:75%; background-color:rgb(125, 59, 59); color:white;">
