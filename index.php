@@ -77,7 +77,7 @@
   }
 } 
 </script>
-	
+
 <!-- START OF Create new thread section -->
 <button type="button" onclick=myFunction() class="btn btn-outline-info btn-rounded" data-mdb-ripple-color="dark">Create new thread/post</button>
 
