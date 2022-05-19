@@ -29,12 +29,12 @@
 
 </head>
 <body>
-<h5 style="color:white;"> Open thread page. Page for reading a specifically chosen thread from "prevthreads.php"</h5> <br>
-
+<!-- Go back to previous page button -->
 <a class="btn btn-primary" href="prevthreads.php" role="button"><- Go back</a>
 
-<br><br><br>	
+<br><br><br>
 
+<!-- Javascript, toggle display/hide form 'Post comment' -->
 <script type="text/javascript">
     function displayComment() {
   var x = document.getElementById("formElement");
@@ -53,7 +53,8 @@ session_start();
     $password = "";
     $DBname = "forum";
     $conn = new mysqli($servername, $username, $password, $DBname);
-
+	
+// Connects 'openthread.php' to 'openthread.html' with file_get_contents
 	$html = file_get_contents("openthread.html");
 	$text_array = explode("***PHP***", $html);
 	echo $text_array[0];
@@ -64,16 +65,9 @@ session_start();
 	$uploadedFile = $_POST["uploadedFile"];
 
 	
-		  /*  $title = array($row["title"]);
-			$username = array($row["username"]); */
-			/*$username = array($row["username"]);*/
-		   /* $uploadTime = array($row["uploadTime"]);*/
-		   /* array_push($row["title"], $row["username"], $row["uploadTime"]); */
-
 		   $x = 1;
 		   if ($x == 1){
 			$sql = "SELECT * FROM comments WHERE threadTitle = '" . $title . "';";
-			//$sql = "SELECT * FROM threads FULL OUTER JOIN comments ON A.Key = B.Key";
 			$text = str_replace("***title***",$_POST["title"],$text_array[1]);
 			$text = str_replace("***username***",$_POST["username"],$text);
 			$text = str_replace("***descr***",$_POST["descr"],$text);
@@ -83,19 +77,15 @@ session_start();
 			$text = str_replace("***commentButton***",$btn,$text);
 			echo $text;
 			
-			/* session_write_close(); */
-			
 			$result = $conn->query($sql);
 			if ($result->num_rows > 0) {
 				echo "Nonzero number of rows...";
 				// output data of each row
 				while($row = $result->fetch_assoc()) {
 					$comment = array($row["username"], $row["userComment"]);
-					//foreach($comment as $zyxwx){
 						$text = str_replace("***username***",$row["username"],$text_array[2]);
 						$text = str_replace("***userComment***",$row["userComment"],$text);
 						echo $text;
-					//}
 				}
 
 				return;
@@ -105,74 +95,16 @@ session_start();
 			}
 		   } 
 		   else {
-			   echo "<p1 style='color:blue;'> IF SATSEN FUNKAR EJ </p";
+			   echo "<p1 style='color:blue;'>'x' is not 1.</p";
 		   }
 
 	
 
-// SELECT * FROM comments INNER JOIN threads ON comments.threadTitle = threads.title;
+
 ?>
 
 
 
-
-//SKAPA createComment.php KANSKE, fixa så att kommentaren som skapas är associerad med rätt thread och dess titel.
-	
-
-
-<!--
-session_start();
-$xy = 2;
-if ($xy == 2){
-	$sql = "SELECT * FROM comments";
-	$result = $conn->query($sql);
-	if ($result->num_rows > 0) {
-		echo "Nonzero number of rows...";
-	 // output data of each row
-	 while($row = $result->fetch_assoc()) {
-		 $comment = array($row["username"], $row["userComment"]);
-		 foreach($comment as $zyxwx){
-		 $text = str_replace("***username***",$row["username"],$text_array[1]);
-		 $text = str_replace("***userComment***",$row["userComment"],$text);
-		 echo $text;
-	 }
- }
-} else {
-	 echo "0 results";
-	 echo "<script> alert('test') </script>";
-   }
-   echo $text_array[2];
-   echo "test";
-	echo "<br><br><br>" . "<p1 style='color:blue;'> TESTETSTT XY == 2</p>";
-}
--->
-
-
-
-<!--===============================================================================================-->
-<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-	<script src="js/main.js"></script>
-	<script src="js/contact.js"></script>
-
-
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-    <!--
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'UA-23581568-13');
-	</script>
--->
 
 </body>
 </html>

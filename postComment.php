@@ -10,7 +10,7 @@
    
 </head>
 <body>
-
+<!-- Go back button -->
 <a class="btn btn-primary" href="prevthreads.php" role="button"><- Go back to main</a> <br><br>
 
     

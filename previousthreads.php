@@ -29,8 +29,10 @@
 </head>
 <body>
 
-
+<!-- Go back to previous page button -->
 <a id="" class="btn btn-primary" href="index.php" role="button"><- Go back</a>
+
+<!-- Table for all previously posted threads -->
 <table class="threads">
     <tbody>
         <tr class="threadrow">
@@ -42,7 +44,9 @@
         <tr class="threadRow">
             <td><a href="openthread.php?subject="></a></td>
 
-            <td> <a href="openthread.php?subject="><?php 
+            <td> <a href="openthread.php?subject=">
+                
+                <?php 
             
             session_start();
 $servername = "localhost";

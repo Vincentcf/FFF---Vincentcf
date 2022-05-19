@@ -38,7 +38,8 @@
     $password = "";
     $DBname = "forum";
     $conn = new mysqli($servername, $username, $password, $DBname);
-
+	
+	// Profile button/link top right corner 
 	$imgUrl = "pfp/". $_SESSION["username"] . ".png";
     echo '
 	<div class="header"> 
@@ -48,25 +49,20 @@
 	<img class="pfp" src=' . $imgUrl . '>
 	</a>
 	</div>
-	<h1>Welcome</h1><br> 
+	<br>
 	You are logged in as: <b>' .  $_SESSION['loginname'] . '</b> <br>' .  'Username: <b>' . $_SESSION['username'] . '</b><br><br>
 	</div>';
-
-	if(isset($_POST['logout'])){
+	
+	// Logout button code, destroys session
+	if(isset($_POST['Logout'])){
 		session_destroy();
 	}
     ?>
 	<form class="btn btn-outline-primary" action="main.php" method="post">
-		<input type="submit" name="logout" value="logout" placeholder="Logot">
+		<input type="submit" name="Logout" value="Logout" placeholder="Logout">
 	</form>
 
-<!-- <script type="text/javascript">
-    function showForm() {
-        document.getElementById('formElement').style.display = 'block';
-        }
-</script>
-    -->
-
+<!-- Javascript för knapp som togglar visa/göm formuläret 'Create new thread' -->
 <script type="text/javascript">
     function myFunction() {
   var x = document.getElementById("formElement");
@@ -78,7 +74,7 @@
 } 
 </script>
 
-<!-- START OF Create new thread section -->
+<!-- START Create new thread form section -->
 <button type="button" onclick=myFunction() class="btn btn-outline-info btn-rounded" data-mdb-ripple-color="dark">Create new thread/post</button>
 
 <div id="formElement" class="bg-contact2" style="background-image: url('images/bg-01.jpg');">
@@ -117,11 +113,11 @@
 			</div>
 		</div>
 	</div>
-<!-- END OF Create new thread section -->
+<!-- END Create new thread section -->
 
 
-  <!-- Start på tidigare skapade trådar -->  
-  <a name="" id="" class="btn btn-primary" href="prevthreads.php" role="button">Previous threads</a>
+  <!--  Read previous threads button -->  
+  <a name="" id="" class="btn btn-primary" href="prevthreads.php" role="button">Visit others threads</a>
 
 
 <!--===============================================================================================-->
@@ -134,21 +130,6 @@
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
 	<script src="js/contact.js"></script>
-
-
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-    <!--
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'UA-23581568-13');
-	</script>
--->
-
 
 
 </body>
