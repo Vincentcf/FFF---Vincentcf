@@ -112,7 +112,7 @@ if (isset($_POST["oldpass"])){
     echo "
     </div></div>";
     echo "<div class=text-center>
-    <p><b>Name: </b></p>" . $_SESSION['username'] . "</div><br>";
+    <p><b>Username: </b></p>" . $_SESSION['username'] . "</div><br>";
     echo "<div class=text-center>
     <p><b>First Name: </b></p>" . $_SESSION['fname'] . "</div><br>";
     echo "<div class=text-center>
