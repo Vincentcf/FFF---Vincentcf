@@ -29,16 +29,24 @@
 
 </head>
 <body>
-<h5 style="color:white;"> Open thread page. Page for reading a specifically chosen thread from "prevthreads.php"</h5> <br>
-
 <a class="btn btn-primary" href="prevthreads.php" role="button"><- Go back</a>
 
 <br><br><br>	
 
+<script type="text/javascript">
+    function displayComment() {
+  var x = document.getElementById("formElement");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+} 
+</script>
 
 <?php
 session_start();
-$servername = "localhost";
+	$servername = "localhost";
     $username = "root";
     $password = "";
     $DBname = "forum";
@@ -52,7 +60,6 @@ $servername = "localhost";
 	$username = $_POST["username"];
 	$descr = $_POST["descr"];
 	$uploadedFile = $_POST["uploadedFile"];
-	
 
 	
 		  /*  $title = array($row["title"]);
@@ -70,8 +77,8 @@ $servername = "localhost";
 			$text = str_replace("***descr***",$_POST["descr"],$text);
 			$text = str_replace("***uploadedFile***",$_POST["uploadedFile"],$text);
 			
-			$btn = '<button class="btn btn-outline-info" type="button" onClick="commentFunction()">' . 'Add comment' . '</button>';
-			$text = str_replace("***commentButton***",$btn,$text_array[1]);
+			$btn = '<button class="btn btn-outline-info" type="button" onClick="displayComment()">' . 'Add comment' . '</button>';
+			$text = str_replace("***commentButton***",$btn,$text);
 			echo $text;
 			
 			/* session_write_close(); */
@@ -82,11 +89,11 @@ $servername = "localhost";
 				// output data of each row
 				while($row = $result->fetch_assoc()) {
 					$comment = array($row["username"], $row["userComment"]);
-					foreach($comment as $zyxwx){
-						$text = str_replace("***username***",$row["username"],$text_array[1]);
+					//foreach($comment as $zyxwx){
+						$text = str_replace("***username***",$row["username"],$text_array[2]);
 						$text = str_replace("***userComment***",$row["userComment"],$text);
 						echo $text;
-					}
+					//}
 				}
 
 				return;
@@ -99,23 +106,10 @@ $servername = "localhost";
 			   echo "<p1 style='color:blue;'> IF SATSEN FUNKAR EJ </p";
 		   }
 
-		   $btn = '<button class="btn btn-outline-info" type="button">' . 'Add comment' . '</button>';
-		   $text = str_replace("***commentButton***",$btn,$text_array[1]);
-		   echo $btn_replace;
-
+	
 
 // SELECT * FROM comments INNER JOIN threads ON comments.threadTitle = threads.title;
 ?>
-
-<script type="text/javascript">
-	<?php
-	$sql = "INSERT INTO comments (username, userComment, threadTitle)
-	VALUES
-	('$_SESSION['username']', '$_POST[userComment]', '$_POST['threadTitle']')";
-//SKAPA createComment.php KANSKE, fixa så att kommentaren som skapas är associerad med rätt thread och dess titel.
-	
-	?>
-</script>
 
 
 <!--
